@@ -1,39 +1,35 @@
 import React from "react";
 import Todo from "./Todo";
 import NewTodo from "./NewTodo";
+import { connect } from "react-redux";
+import { createTodo, removeTodo } from "../actions/todos";
 
-const TODOS = [
-  {
-    title: "Something",
-    id: "asdsfsf1",
-    label: "some label",
-  },
-  {
-    title: "Some ",
-    id: "asdsfsf2",
-    label: "some label",
-  },
-  {
-    title: " Thing",
-    id: "asdsfsf3",
-    label: "some label",
-  },
-  {
-    title: " Meeting",
-    id: "asdsfsf4",
-    label: "some label",
-  },
-];
-
-const Todos = () => {
+const Todos = ({ todos, onTodoCreated, onTodoRemoved }) => {
   return (
     <div style={{ flex: 1, paddingTop: 10 }}>
-      {TODOS.map((item) => (
-        <Todo key={item.id} item={item} />
+      {todos.map((item) => (
+        <Todo key={item.id} item={item} onTodoRemoved={onTodoRemoved} />
       ))}
-      <NewTodo />
+      <NewTodo onTodoCreated={onTodoCreated} />
     </div>
   );
 };
 
-export default Todos;
+function mapStateToProps(state) {
+  return {
+    todos: state.todos.data,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onTodoCreated: (values) => {
+      dispatch(createTodo(values));
+    },
+    onTodoRemoved: (id) => {
+       dispatch(removeTodo(id))
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todos);

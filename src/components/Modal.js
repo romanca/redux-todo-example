@@ -9,12 +9,20 @@ const Button = ({ label, onClick, backgroundColor }) => {
 };
 
 const Modal = ({ modalContent, onRequestClose }) => {
-  const { title, content, actions } = modalContent;
+  const { title, content, actions, validate } = modalContent;
 
   const [contentValues, setContentValues] = useState(null);
+  const [errors, setErrors] = useState(null);
 
   const getActionClickHandler = (action) => () => {
     if (action.type === "CONTENT_CONFIRMATION") {
+      let newErrors = null;
+      if (validate) {
+        newErrors = validate(contentValues);
+        if (Object.values(newErrors)) {
+          setErrors(newErrors)
+        }
+      }
       action.onClick(contentValues);
     } else {
       if (action.onClick) {
@@ -64,7 +72,7 @@ const Modal = ({ modalContent, onRequestClose }) => {
         </h3>
         <div style={{ flex: 1 }}>
           {content &&
-            content({ actions, onContentValuesChange: setContentValues })}
+            content({ actions, onContentValuesChange: setContentValues, errors })}
         </div>
         <div
           style={{

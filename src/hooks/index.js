@@ -28,13 +28,20 @@ export const useProjectEditModal = () => {
   };
 };
 
-export const useEditTodoDialog = () => {
+export const useEditTodoDialog = ({ onConfirm }) => {
   const { setModal, closeModal } = useModal();
   return () => {
     setModal({
       opened: true,
       title: "New todo",
       content: AddTicketModalContent,
+      validate: values => {
+        const errors = {};
+        if (!values.title) {
+          errors.title = 'Requuired';
+        };
+        return errors;
+      },
       actions: [
         {
           label: "Cancel",
@@ -44,8 +51,10 @@ export const useEditTodoDialog = () => {
           label: "Add",
           type: "CONTENT_CONFIRMATION",
           onClick: (values) => {
-            alert(JSON.stringify(values, null, 2));
-            closeModal();
+            if (values.title.length > 0) {
+              onConfirm(values);
+              closeModal();
+            }
           },
         },
       ],

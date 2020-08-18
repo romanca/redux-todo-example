@@ -7,9 +7,9 @@ const ModalProvider = ({ children }) => {
   const [opened, setOpened] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
-  const setModal = ({ opened, title, content, actions }) => {
+  const setModal = ({ opened, title, content, actions, validate }) => {
     setOpened(opened);
-    setModalContent({ title, content, actions });
+    setModalContent({ title, content, actions, validate });
   };
 
   const handleCloseRequest = () => {

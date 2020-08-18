@@ -1,21 +1,18 @@
 import React, { useState } from "react";
+ 
 
-const Todo = ({ item }) => {
+const Todo = ({ item, onTodoRemoved }) => {
   const [hovered, setHovered] = useState(false);
 
   const toggleHovered = () => {
     setHovered(!hovered);
   };
-  const onRemoveButtonClick = () => {
-    alert(`remove button clicked: ${item.id}`) 
-  };
+  
 
   const backgroundColor = hovered ? "lightGray" : "transparent";
 
   return (
     <div
-      onMouseEnter={toggleHovered}
-      onMouseLeave={toggleHovered}
       style={{
         border: "0.2px solid black",
         padding: 5,
@@ -36,7 +33,9 @@ const Todo = ({ item }) => {
             backgroundColor,
             borderRadius: 4,
           }}
-          onClick={onRemoveButtonClick}
+          onMouseEnter={toggleHovered}
+          onMouseLeave={toggleHovered}
+          onClick={() => { onTodoRemoved(item.id) }}
         >
           x
         </button>

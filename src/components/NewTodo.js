@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { useEditTodoDialog } from "../hooks";
 
-const NewTodo = () => {
+const NewTodo = ({ onTodoCreated }) => {
   const [hovered, setHovered] = useState(false);
 
-  const handleClick = useEditTodoDialog();
+  const handleTodoCreation = (values) => {
+    onTodoCreated(values);
+  };
+
+  const handleClick = useEditTodoDialog({ onConfirm: handleTodoCreation });
 
   const toggleHovered = () => {
     setHovered(!hovered);
