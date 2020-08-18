@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Menu from "./components/Menu";
+import Todos from "./components/Todos";
+import ModalProvider from "./Providers/ModalProvider";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <ModalProvider>
+      <div
+        style={{
+          padding: 50
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flex: 1,
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Menu />
+          <Todos />
+        </div>
+      </div>
+    </ModalProvider>
   );
 }
 
