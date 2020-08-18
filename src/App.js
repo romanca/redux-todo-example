@@ -8,7 +8,8 @@ function App() {
     <ModalProvider>
       <div
         style={{
-          padding: 50
+          padding: 50,
+          paddingTop: 100
         }}
       >
         <div
@@ -16,10 +17,21 @@ function App() {
             display: "flex",
             flexDirection: "row",
             flex: 1,
+            justifyContent: "center",
           }}
         >
-          <Menu />
-          <Todos />
+          <div
+            style={{
+              maxWidth: "70%",
+              flex: 1,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <Menu />
+            <Todos />
+          </div>
         </div>
       </div>
     </ModalProvider>

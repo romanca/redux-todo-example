@@ -27,7 +27,7 @@ const MenuItem = ({ item, itemType }) => {
 
   const renderLeftIcon = () => {
     if (item.items) {
-      return `>   `;
+      return `>`;
     }
     return (
       <div

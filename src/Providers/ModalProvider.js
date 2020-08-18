@@ -1,20 +1,6 @@
 import React, { useState, useContext } from "react";
 import Modal from "../components/Modal";
 
-const defaultContext = {
-  opened: true,
-  title: "My title",
-  content: <div>this is my modal content</div>,
-  actions: [
-    {
-      label: "cancel",
-      onClick: () => {
-        alert("cancel clicked");
-      },
-    },
-  ],
-};
-
 const ModalsContext = React.createContext({ setModal: () => {} });
 
 const ModalProvider = ({ children }) => {
@@ -30,8 +16,6 @@ const ModalProvider = ({ children }) => {
     setOpened(false);
     setModalContent(null);
   };
-
-
 
   return (
     <ModalsContext.Provider value={{ setModal, closeModal: handleCloseRequest }}>

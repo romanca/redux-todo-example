@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useModal } from "../Providers/ModalProvider";
+import { useProjectEditModal } from "../hooks";
 
 export const MENU_ACTION_BUTTON_TYPES = {
   ADD_PROJECT: "ADD_PROJECT",
@@ -8,52 +8,10 @@ export const MENU_ACTION_BUTTON_TYPES = {
   LABEL_HAMBURGER: "LABEL_HAM",
 };
 
-const AddProjectModalContent = ({ actions, onContentValuesChange }) => {
-  const [values, setValues] = useState({ title: "" });
-  const getFieldChangeHandler = (field) => (e) => {
-    setValues({
-      ...values,
-      [field]: e.target.value,
-    });
-    onContentValuesChange(values);
-  };
-  return (
-    <div>
-      <input value={values.title} onChange={getFieldChangeHandler("title")} />
-    </div>
-  );
-};
-
-const useProjectsModal = () => {
-  const { setModal, closeModal } = useModal();
-  return () => {
-    setModal({
-      opened: true,
-      title: "Project creation",
-      content: AddProjectModalContent,
-      actions: [
-        {
-          label: "Cancel",
-          requestClose: true,
-        },
-        {
-          label: "Add",
-          color: "red",
-          type: "CONTENT_CONFIRMATION",
-          onClick: (values) => {
-            alert(JSON.stringify(values, null, 2));
-            closeModal();
-          },
-        },
-      ],
-    });
-  };
-};
-
 const MenuItemRightButton = ({ type }) => {
   const [hovered, setHovered] = useState(false);
 
-  const openProjectsModal = useProjectsModal();
+  const openProjectsModal = useProjectEditModal();
 
   const toggleHovered = () => {
     setHovered(!hovered);

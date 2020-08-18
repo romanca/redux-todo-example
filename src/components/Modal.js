@@ -42,7 +42,8 @@ const Modal = ({ modalContent, onRequestClose }) => {
       <div
         style={{
           width: "40%",
-          height: 300,
+          height: 'fit-content',
+          minHeight: 300,
           backgroundColor: "white",
           border: "1 px solid black",
           padding: 15,
