@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import FormField from "./FormField";
+import FormField, { FORM_FILED_TYPES } from "./FormField";
+import Space from "./Space";
 
 const AddTicketModalContent = ({ onContentValuesChange, errors }) => {
   const [values, setValues] = useState({ title: "" });
-
-  useEffect(() => {
-    onContentValuesChange(values);
-  }, [])
 
   const getFieldChangeHandler = (field) => (e) => {
     const newValues = {
@@ -25,6 +22,8 @@ const AddTicketModalContent = ({ onContentValuesChange, errors }) => {
         onChange={getFieldChangeHandler("title")}
         label="Todo name"
       />
+      <Space x={10} />
+      <FormField type={FORM_FILED_TYPES.PROJECTS_PICKER} />
     </div>
   );
 };

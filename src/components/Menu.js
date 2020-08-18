@@ -2,7 +2,7 @@ import React from "react";
 import MenuItem from "./MenuItem";
 import { MENU_ACTION_BUTTON_TYPES } from "./MenuItemRightButton";
 
-const projects = [
+export const projects = [
   {
     label: "Project One",
     id: "1",

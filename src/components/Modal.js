@@ -11,19 +11,26 @@ const Button = ({ label, onClick, backgroundColor }) => {
 const Modal = ({ modalContent, onRequestClose }) => {
   const { title, content, actions, validate } = modalContent;
 
-  const [contentValues, setContentValues] = useState(null);
-  const [errors, setErrors] = useState(null);
+  const [contentValues, setContentValues] = useState({});
+  const [errors, setErrors] = useState({});
+
+  const onContentValuesChange = (values) => {
+    let newErrors = null;
+    if (validate) {
+      newErrors = validate(values);
+      setErrors(newErrors);
+    }
+    setContentValues(values);
+  };
 
   const getActionClickHandler = (action) => () => {
     if (action.type === "CONTENT_CONFIRMATION") {
       let newErrors = null;
       if (validate) {
         newErrors = validate(contentValues);
-        if (Object.values(newErrors)) {
-          setErrors(newErrors)
-        }
+        setErrors(newErrors);
       }
-      action.onClick(contentValues);
+      action.onClick({ values: contentValues, errors: newErrors });
     } else {
       if (action.onClick) {
         action.onClick();
@@ -50,7 +57,7 @@ const Modal = ({ modalContent, onRequestClose }) => {
       <div
         style={{
           width: "40%",
-          height: 'fit-content',
+          height: "fit-content",
           minHeight: 300,
           backgroundColor: "white",
           border: "1 px solid black",
@@ -72,7 +79,11 @@ const Modal = ({ modalContent, onRequestClose }) => {
         </h3>
         <div style={{ flex: 1 }}>
           {content &&
-            content({ actions, onContentValuesChange: setContentValues, errors })}
+            content({
+              actions,
+              onContentValuesChange,
+              errors,
+            })}
         </div>
         <div
           style={{

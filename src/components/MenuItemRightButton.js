@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useProjectEditModal } from "../hooks";
+import ContextMenu from "./ContextMenu";
 
 export const MENU_ACTION_BUTTON_TYPES = {
   ADD_PROJECT: "ADD_PROJECT",
@@ -8,7 +9,16 @@ export const MENU_ACTION_BUTTON_TYPES = {
   LABEL_HAMBURGER: "LABEL_HAM",
 };
 
-const MenuItemRightButton = ({ type }) => {
+const HAMBURGER_ITEMS = [
+  {
+    label: "edit",
+  },
+  {
+    label: "delete",
+  },
+];
+
+const MenuItemRightButton = ({ type, itemId }) => {
   const [hovered, setHovered] = useState(false);
 
   const openProjectsModal = useProjectEditModal();
@@ -27,11 +37,17 @@ const MenuItemRightButton = ({ type }) => {
       case MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER:
       case MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER:
         return (
-          <div style={{ lineHeight: 0.2, fontSize: 20, height: 20 }}>
-            <div>.</div>
-            <div>.</div>
-            <div>.</div>
-          </div>
+          <ContextMenu
+            onItemClick={() => {}}
+            id={`CONTEXT_MENU_${MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER}_${itemId}`}
+            items={HAMBURGER_ITEMS}
+          >
+            <div style={{ lineHeight: 0.2, fontSize: 20, height: 20 }}>
+              <div>.</div>
+              <div>.</div>
+              <div>.</div>
+            </div>
+          </ContextMenu>
         );
       default:
         return null;
@@ -44,10 +60,6 @@ const MenuItemRightButton = ({ type }) => {
       case MENU_ACTION_BUTTON_TYPES.ADD_PROJECT:
       case MENU_ACTION_BUTTON_TYPES.ADD_LABEL:
         openProjectsModal();
-        break;
-      case MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER:
-      case MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER:
-        alert(`BUTTON_TYPE: ${type}`);
         break;
       default:
         return null;

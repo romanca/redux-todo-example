@@ -50,8 +50,9 @@ export const useEditTodoDialog = ({ onConfirm }) => {
         {
           label: "Add",
           type: "CONTENT_CONFIRMATION",
-          onClick: (values) => {
-            if (values.title.length > 0) {
+          onClick: ({values, errors}) => {
+            console.log("useEditTodoDialog -> values", {values, errors})
+            if (!(Object.values(errors).length)) {
               onConfirm(values);
               closeModal();
             }
