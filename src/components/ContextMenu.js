@@ -29,7 +29,7 @@ const Item = ({ item, onClick }) => {
   );
 };
 
-const ContextMenu = ({ children, items, onItemClick, id }) => {
+const ContextMenu = ({ children, items, onItemClick, id, menuContent }) => {
   return (
     <div style={{ width: 'fit-content' }}>
       <ContextMenuTrigger id={id} mouseButton={0}>
@@ -44,7 +44,8 @@ const ContextMenu = ({ children, items, onItemClick, id }) => {
           zIndex: 9999
         }}
       >
-        {items.map((i, index) => (
+        {menuContent && menuContent}
+        {items && items.map((i, index) => (
           <Item key={index} item={i} onClick={onItemClick} />
         ))}
       </ContextMenuRaw>
