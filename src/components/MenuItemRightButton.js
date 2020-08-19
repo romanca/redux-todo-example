@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useProjectEditModal } from "../hooks";
+import React from "react";
+import { useProjectEditModal, useHover } from "../hooks";
 import ContextMenu from "./ContextMenu";
 
 export const MENU_ACTION_BUTTON_TYPES = {
@@ -19,13 +19,9 @@ const HAMBURGER_ITEMS = [
 ];
 
 const MenuItemRightButton = ({ type, itemId }) => {
-  const [hovered, setHovered] = useState(false);
+  const { listeners, hovered } = useHover();
 
   const openProjectsModal = useProjectEditModal();
-
-  const toggleHovered = () => {
-    setHovered(!hovered);
-  };
 
   const backgroundColor = hovered ? "lightGray" : "white";
 
@@ -69,8 +65,7 @@ const MenuItemRightButton = ({ type, itemId }) => {
   return (
     <div
       onClick={handleClick}
-      onMouseEnter={toggleHovered}
-      onMouseLeave={toggleHovered}
+      {...listeners}
       style={{
         padding: "0 5px",
         height: "fit-content",

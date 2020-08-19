@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
+import { useHover } from "../hooks";
  
 
 const Todo = ({ item, onTodoRemoved }) => {
-  const [hovered, setHovered] = useState(false);
-
-  const toggleHovered = () => {
-    setHovered(!hovered);
-  };
-  
+  const { listeners, hovered } = useHover();
 
   const backgroundColor = hovered ? "lightGray" : "transparent";
 
@@ -33,8 +29,7 @@ const Todo = ({ item, onTodoRemoved }) => {
             backgroundColor,
             borderRadius: 4,
           }}
-          onMouseEnter={toggleHovered}
-          onMouseLeave={toggleHovered}
+          {...listeners}
           onClick={() => { onTodoRemoved(item.id) }}
         >
           x

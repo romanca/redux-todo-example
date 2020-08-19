@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useModal } from "../Providers/ModalProvider";
 import AddProjectModalContent from "../components/AddProjectModalContent";
 import AddTicketModalContent from "../components/AddTodoModalContent";
@@ -84,3 +84,16 @@ export const useConfirmationDialog = () => {
     });
   };
 };
+
+export const useHover = () => {
+  const [hovered, setHovered] = useState(false);
+
+  return {
+    listeners: {
+      onMouseEnter: () => setHovered(true),
+      onMouseLeave: () => setHovered(false)
+    },
+    hovered
+  }
+
+}

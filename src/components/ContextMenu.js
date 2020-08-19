@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ContextMenu as ContextMenuRaw,
   MenuItem,
   ContextMenuTrigger,
 } from "react-contextmenu";
+import { useHover } from "../hooks";
 
 const Item = ({ item, onClick }) => {
-  const [hovered, setHovered] = useState(false);
-  const toggleHovered = () => {
-    setHovered(!hovered);
-  };
+  const { listeners, hovered } = useHover();
   const backgroundColor = hovered ? "lightGray" : "";
   return (
     <MenuItem data={{ foo: "bar" }} onClick={() => {}}>
@@ -17,8 +15,7 @@ const Item = ({ item, onClick }) => {
         onClick={() => {
           onClick(item);
         }}
-        onMouseEnter={toggleHovered}
-        onMouseLeave={toggleHovered}
+        {...listeners}
         style={{
           padding: 5,
           borderBottom: "1px solid black",
