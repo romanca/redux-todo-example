@@ -1,6 +1,6 @@
 import React from "react";
-import { useProjectEditModal, useHover } from "../hooks";
-import ContextMenu from "./ContextMenu";
+import { useProjectEditModal } from "../hooks";
+import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
 
 export const MENU_ACTION_BUTTON_TYPES = {
   ADD_PROJECT: "ADD_PROJECT",
@@ -19,36 +19,8 @@ const HAMBURGER_ITEMS = [
 ];
 
 const MenuItemRightButton = ({ type, itemId }) => {
-  const { listeners, hovered } = useHover();
 
   const openProjectsModal = useProjectEditModal();
-
-  const backgroundColor = hovered ? "lightGray" : "white";
-
-  const renderIcon = () => {
-    switch (type) {
-      case MENU_ACTION_BUTTON_TYPES.ADD_PROJECT:
-      case MENU_ACTION_BUTTON_TYPES.ADD_LABEL:
-        return <div>+</div>;
-      case MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER:
-      case MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER:
-        return (
-          <ContextMenu
-            onItemClick={() => {}}
-            id={`CONTEXT_MENU_${MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER}_${itemId}`}
-            items={HAMBURGER_ITEMS}
-          >
-            <div style={{ lineHeight: 0.2, fontSize: 20, height: 20 }}>
-              <div>.</div>
-              <div>.</div>
-              <div>.</div>
-            </div>
-          </ContextMenu>
-        );
-      default:
-        return null;
-    }
-  };
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -62,21 +34,23 @@ const MenuItemRightButton = ({ type, itemId }) => {
     }
   };
 
-  return (
-    <div
-      onClick={handleClick}
-      {...listeners}
-      style={{
-        padding: "0 5px",
-        height: "fit-content",
-        backgroundColor,
-        position: "absolute",
-        right: 0,
-      }}
-    >
-      {renderIcon()}
-    </div>
-  );
+  switch (type) {
+    case MENU_ACTION_BUTTON_TYPES.ADD_PROJECT:
+    case MENU_ACTION_BUTTON_TYPES.ADD_LABEL:
+      return <IconButton type={ICON_BUTTON_TYPES.PLUS} onClick={handleClick} />;
+    case MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER:
+    case MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER:
+      return (
+        <IconButton
+          type={ICON_BUTTON_TYPES.CONTEXT_MENU}
+          onClick={() => {}}
+          contextMenuId={`CONTEXT_MENU_${MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER}_${itemId}`}
+          items={HAMBURGER_ITEMS}
+        />
+      );
+    default:
+      return null;
+  }
 };
 
 export default MenuItemRightButton;

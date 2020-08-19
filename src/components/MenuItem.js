@@ -61,8 +61,8 @@ const MenuItem = ({ item, itemType }) => {
           }}
         >
           {renderLeftIcon()}
-          <span style={{ marginLeft: 5, color }}>{item.label}</span>
-          {<MenuItemRightButton type={item.rightButtonType} itemId={item.id} />}
+          <div style={{ marginLeft: 5, color }}>{item.label}</div>
+          <MenuItemRightButton type={item.rightButtonType} itemId={item.id} />
         </div>
       </div>
       {areSubItemsVisible

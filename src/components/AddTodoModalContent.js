@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import FormField, { FORM_FILED_TYPES } from "./FormField";
 import Space from "./Space";
 
@@ -15,7 +15,7 @@ const AddTicketModalContent = ({ onContentValuesChange, errors }) => {
   };
 
   return (
-    <div>
+    <div style={{ width: "50%", minWidth: 300 }}>
       <FormField
         error={errors ? errors.title : null}
         value={values.title}

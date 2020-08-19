@@ -26,7 +26,7 @@ const FormField = ({ type, onChange, value, label, error }) => {
       return (
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ marginBottom: 5 }}>{label}</div>
-          <input onChange={onChange} value={value} />
+          <input onChange={onChange} value={value} style={{ padding: 5 }} />
           {error ? (
             <small style={{ color: "red", marginLeft: 5, marginTop: 5 }}>
               {error}

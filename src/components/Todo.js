@@ -1,11 +1,12 @@
 import React from "react";
-import { useHover } from "../hooks";
+import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
  
 
 const Todo = ({ item, onTodoRemoved }) => {
-  const { listeners, hovered } = useHover();
 
-  const backgroundColor = hovered ? "lightGray" : "transparent";
+  const handleTodoRemove = () => {
+    onTodoRemoved(item.id);
+  }
 
   return (
     <div
@@ -19,22 +20,7 @@ const Todo = ({ item, onTodoRemoved }) => {
       }}
     >
       {item.title}
-      <div style={{ float: "right", marginTop: -4 }}>
-        <button
-          style={{
-            border: "none",
-            fontSize: 20,
-            cursor: "pointer",
-            outline: "none",
-            backgroundColor,
-            borderRadius: 4,
-          }}
-          {...listeners}
-          onClick={() => { onTodoRemoved(item.id) }}
-        >
-          x
-        </button>
-      </div>
+      <IconButton type={ICON_BUTTON_TYPES.CLOSE} onClick={handleTodoRemove} />
     </div>
   );
 };
