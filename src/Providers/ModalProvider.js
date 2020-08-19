@@ -5,22 +5,41 @@ const ModalsContext = React.createContext({ setModal: () => {} });
 
 const ModalProvider = ({ children }) => {
   const [opened, setOpened] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
   const setModal = ({ opened, title, content, actions, validate }) => {
-    setOpened(opened);
-    setModalContent({ title, content, actions, validate });
+    if (opened) {
+      setModalContent({ title, content, actions, validate });
+      openModal();
+    } else {
+      closeModal();
+    }
+  };
+
+  const openModal = () => {
+    setOpened(true);
+    setTimeout(() => {
+      setVisible(true);
+    }, 100);
+  };
+
+  const closeModal = () => {
+    setVisible(false);
+    setTimeout(() => {
+      setOpened(false);
+      setModalContent(null);
+    }, 500);
   };
 
   const handleCloseRequest = () => {
-    setOpened(false);
-    setModalContent(null);
+    closeModal();
   };
 
   return (
     <ModalsContext.Provider value={{ setModal, closeModal: handleCloseRequest }}>
       {opened && modalContent && (
-        <Modal modalContent={modalContent} onRequestClose={handleCloseRequest} />
+        <Modal visible={visible} modalContent={modalContent} onRequestClose={handleCloseRequest} />
       )}
       {children}
     </ModalsContext.Provider>

@@ -10,9 +10,11 @@ const MenuItem = ({ item, itemType }) => {
     setOpened(!opened);
   };
 
-  const areSubItemsVisible = opened && item.items && item.items.length;
+  const hasSubItems = item.items && item.items.length;
 
   const borderBottom = opened ? "" : "1px solid black";
+
+  const subItemsHeight = !hasSubItems || !opened ? 0 : item.items.length * 38;
 
   const getItemClickHandler = (item) => (event) => {
     event.stopPropagation();
@@ -65,11 +67,13 @@ const MenuItem = ({ item, itemType }) => {
           <MenuItemRightButton type={item.rightButtonType} itemId={item.id} />
         </div>
       </div>
-      {areSubItemsVisible
-        ? item.items.map((i) => (
+      {hasSubItems ? (
+        <div style={{ height: subItemsHeight, overflow: "hidden", transition: "height 0.3s" }}>
+          {item.items.map((i) => (
             <MenuItem key={i.id} itemType={itemType} item={i} />
-          ))
-        : null}
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };

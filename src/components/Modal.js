@@ -8,7 +8,7 @@ const Button = ({ label, onClick, backgroundColor }) => {
   );
 };
 
-const Modal = ({ modalContent, onRequestClose }) => {
+const Modal = ({ modalContent, onRequestClose, visible }) => {
   const { title, content, actions, validate } = modalContent;
 
   const [contentValues, setContentValues] = useState({});
@@ -44,6 +44,8 @@ const Modal = ({ modalContent, onRequestClose }) => {
   return (
     <div
       style={{
+        transition: "opacity 0.5s",
+        opacity: visible ? 1 : 0,
         position: "absolute",
         width: "100%",
         height: "100%",
