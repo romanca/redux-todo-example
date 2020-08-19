@@ -30,16 +30,17 @@ export const useProjectEditModal = () => {
 
 export const useEditTodoDialog = ({ onConfirm }) => {
   const { setModal, closeModal } = useModal();
-  return () => {
+  return ({ initialValues }) => {
     setModal({
       opened: true,
+      initialValues,
       title: "New todo",
       content: AddTicketModalContent,
-      validate: values => {
+      validate: (values) => {
         const errors = {};
         if (!values.title) {
-          errors.title = 'Requuired';
-        };
+          errors.title = "Requuired";
+        }
         return errors;
       },
       actions: [
@@ -48,11 +49,10 @@ export const useEditTodoDialog = ({ onConfirm }) => {
           requestClose: true,
         },
         {
-          label: "Add",
+          label: initialValues ? "Edit" : "Add",
           type: "CONTENT_CONFIRMATION",
-          onClick: ({values, errors}) => {
-            console.log("useEditTodoDialog -> values", {values, errors})
-            if (!(Object.values(errors).length)) {
+          onClick: ({ values, errors }) => {
+            if (!Object.values(errors).length) {
               onConfirm(values);
               closeModal();
             }
@@ -67,6 +67,7 @@ export const useConfirmationDialog = () => {
   const { setModal } = useModal();
   return ({ title, message, onConfirm }) => {
     setModal({
+      small: true,
       opened: true,
       title,
       content: () => <div>{message}</div>,
@@ -91,9 +92,8 @@ export const useHover = () => {
   return {
     listeners: {
       onMouseEnter: () => setHovered(true),
-      onMouseLeave: () => setHovered(false)
+      onMouseLeave: () => setHovered(false),
     },
-    hovered
-  }
-
-}
+    hovered,
+  };
+};

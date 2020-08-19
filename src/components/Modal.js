@@ -9,7 +9,7 @@ const Button = ({ label, onClick, backgroundColor }) => {
 };
 
 const Modal = ({ modalContent, onRequestClose, visible }) => {
-  const { title, content, actions, validate } = modalContent;
+  const { title, content, actions, validate, small, initialValues } = modalContent;
 
   const [contentValues, setContentValues] = useState({});
   const [errors, setErrors] = useState({});
@@ -58,9 +58,9 @@ const Modal = ({ modalContent, onRequestClose, visible }) => {
     >
       <div
         style={{
-          width: "40%",
+          width: small ? 200 : "40%",
           height: "fit-content",
-          minHeight: 300,
+          minHeight: 150,
           backgroundColor: "white",
           border: "1 px solid black",
           padding: 15,
@@ -79,12 +79,13 @@ const Modal = ({ modalContent, onRequestClose, visible }) => {
         >
           {title}
         </h3>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, paddingBottom: 20 }}>
           {content &&
             content({
               actions,
               onContentValuesChange,
               errors,
+              initialValues
             })}
         </div>
         <div

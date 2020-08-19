@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormField, { FORM_FILED_TYPES } from "./FormField";
 import Space from "./Space";
 
-const AddTicketModalContent = ({ onContentValuesChange, errors }) => {
+const AddTicketModalContent = ({
+  onContentValuesChange,
+  errors,
+  initialValues,
+}) => {
   const [values, setValues] = useState({ title: "" });
+
+
+  useEffect(() => {
+    if (initialValues) {
+      setValues(initialValues);
+      onContentValuesChange(initialValues);
+    }
+  }, [initialValues]);
 
   const getFieldChangeHandler = (field) => (e) => {
     const newValues = {

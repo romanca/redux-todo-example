@@ -8,9 +8,24 @@ const ModalProvider = ({ children }) => {
   const [visible, setVisible] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
-  const setModal = ({ opened, title, content, actions, validate }) => {
+  const setModal = ({
+    opened,
+    title,
+    content,
+    actions,
+    validate,
+    small,
+    initialValues,
+  }) => {
     if (opened) {
-      setModalContent({ title, content, actions, validate });
+      setModalContent({
+        title,
+        content,
+        actions,
+        validate,
+        small,
+        initialValues,
+      });
       openModal();
     } else {
       closeModal();
@@ -37,9 +52,15 @@ const ModalProvider = ({ children }) => {
   };
 
   return (
-    <ModalsContext.Provider value={{ setModal, closeModal: handleCloseRequest }}>
+    <ModalsContext.Provider
+      value={{ setModal, closeModal: handleCloseRequest }}
+    >
       {opened && modalContent && (
-        <Modal visible={visible} modalContent={modalContent} onRequestClose={handleCloseRequest} />
+        <Modal
+          visible={visible}
+          modalContent={modalContent}
+          onRequestClose={handleCloseRequest}
+        />
       )}
       {children}
     </ModalsContext.Provider>
