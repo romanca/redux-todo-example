@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { useModal } from "../Providers/ModalProvider";
 import AddProjectModalContent from "../components/AddProjectModalContent";
 import AddTicketModalContent from "../components/AddTodoModalContent";
+import { useDispatch } from 'react-redux';
+import { createProject } from "../actions/projects";
 
 export const useProjectEditModal = () => {
   const { setModal, closeModal } = useModal();
+  const dispatch = useDispatch();
   return () => {
     setModal({
       opened: true,
@@ -18,8 +21,10 @@ export const useProjectEditModal = () => {
         {
           label: "Add",
           type: "CONTENT_CONFIRMATION",
-          onClick: (values) => {
-            alert(JSON.stringify(values, null, 2));
+          onClick: ({ values }) => {
+            dispatch(
+             createProject(values)
+            );
             closeModal();
           },
         },

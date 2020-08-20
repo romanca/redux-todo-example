@@ -1,33 +1,9 @@
 import React from "react";
 import MenuItem from "./MenuItem";
 import { MENU_ACTION_BUTTON_TYPES } from "./MenuItemRightButton";
-
-export const projects = [
-  {
-    label: "Project One",
-    id: "1",
-    color: "red",
-    rightButtonType: MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER,
-  },
-  {
-    label: "Project Two",
-    id: "2",
-    color: "red",
-    rightButtonType: MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER,
-  },
-  {
-    label: "Project Three",
-    id: "3",
-    color: "red",
-    rightButtonType: MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER,
-  },
-  {
-    label: "Project Four",
-    id: "4",
-    color: "red",
-    rightButtonType: MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER,
-  },
-];
+import { connect } from "react-redux";
+import { isProjectMenuOpened } from "../selectors";
+import { toggleProjectsMenuItem } from "../actions/uiState";
 
 const labels = [
   {
@@ -56,7 +32,7 @@ const labels = [
   },
 ];
 
-const Menu = () => {
+const Menu = ({ projects, projectMenuOpened, toggleProjectMenu }) => {
   return (
     <div
       style={{
@@ -75,9 +51,14 @@ const Menu = () => {
       }}
     >
       <MenuItem
+        opened={projectMenuOpened}
+        onToggle={toggleProjectMenu}
         item={{
           label: "Projects",
-          items: projects,
+          items: projects.map((i) => ({
+            ...i,
+            rightButtonType: MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER,
+          })),
           rightButtonType: MENU_ACTION_BUTTON_TYPES.ADD_PROJECT,
         }}
         itemType="PROJECTS"
@@ -94,4 +75,19 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+function mapStateToProps(state) {
+  return {
+    projects: state.projects.projects,
+    projectMenuOpened: isProjectMenuOpened(state)
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    toggleProjectMenu: value => {
+      dispatch(toggleProjectsMenuItem(value))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

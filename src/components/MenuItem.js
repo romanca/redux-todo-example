@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import MenuItemRightButton from "./MenuItemRightButton";
 import { useHover } from "../hooks";
 
-const MenuItem = ({ item, itemType }) => {
-  const [opened, setOpened] = useState(false);
+const MenuItem = ({ item, itemType, opened, onToggle }) => {
   const { listeners, hovered } = useHover();
 
   const toggleOpened = () => {
-    setOpened(!opened);
+    onToggle(!opened);
   };
 
   const hasSubItems = item.items && item.items.length;

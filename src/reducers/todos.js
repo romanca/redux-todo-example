@@ -22,6 +22,13 @@ export default function (state = initialState, action) {
         ...state,
         data: state.data.filter((i) => i.id !== action.payload),
       };
+    case TODO_ACTIONS.EDIT_TODO:
+      return {
+        ...state,
+        data: state.data.map((i) =>
+          i.id === action.payload.id ? action.payload : i
+        ),
+      };
     default:
       return state;
   }

@@ -13,12 +13,12 @@ const TODO_ITEM_MENU = [
   },
 ];
 
-const Todo = ({ item, onTodoRemoved }) => {
+const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
   const showConfirmDialog = useConfirmationDialog();
 
   const showEditTodoDialog = useEditTodoDialog({
     onConfirm: (value) => {
-      alert(JSON.stringify(value, null, 2));
+      onTodoEdited(value)
     },
   });
 

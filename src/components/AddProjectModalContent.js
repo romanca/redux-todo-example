@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import FormField, { FORM_FILED_TYPES } from "./FormField";
 import Space from "./Space";
 
-const AddProjectModalContent = ({ actions, onContentValuesChange }) => {
-  const [values, setValues] = useState({ title: "", color: "blue" });
+const AddProjectModalContent = ({ onContentValuesChange }) => {
+  const [values, setValues] = useState({ label: "", color: "blue" });
   const getFieldChangeHandler = (field) => (e) => {
     const newValues = {
       ...values,
@@ -25,8 +25,8 @@ const AddProjectModalContent = ({ actions, onContentValuesChange }) => {
   return (
     <div>
       <FormField
-        value={values.title}
-        onChange={getFieldChangeHandler("title")}
+        value={values.label}
+        onChange={getFieldChangeHandler("label")}
         label="Project name"
       />
       <Space x={10} />

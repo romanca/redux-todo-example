@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { projects } from "./Menu";
 import ContextMenu from "./ContextMenu";
+import {connect} from "react-redux"
 
-const ProjectsPicker = () => {
+const ProjectsPicker = ({projects}) => {
   const [value, setValue] = useState(projects[0]);
 
   const handleClick = (item) => {
@@ -36,5 +36,10 @@ const ProjectsPicker = () => {
     </ContextMenu>
   );
 };
+function mapStateToProps(state) {
+  return {
+    projects: state.projects.projects,
+  };
+}
 
-export default ProjectsPicker;
+export default connect(mapStateToProps, null)(ProjectsPicker);

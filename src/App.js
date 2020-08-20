@@ -2,20 +2,33 @@ import React from "react";
 import Menu from "./components/Menu";
 import Todos from "./components/Todos";
 import ModalProvider from "./Providers/ModalProvider";
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import rootReducer from './reducers';
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import rootReducer from "./reducers";
+import ReduxThunk from "redux-thunk";
+import apiMethods from "./utils/apiMethods";
+import { getAllProjects } from "./actions/projects";
+import { getUiState } from "./actions/uiState";
 
-const store = createStore(rootReducer)
+const store = createStore(
+  rootReducer,
+  compose(
+    applyMiddleware(ReduxThunk.withExtraArgument({ apiMethods })),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);
+
+store.dispatch(getAllProjects());
+store.dispatch(getUiState());
 
 function App() {
   return (
-    <Provider store={store} >
+    <Provider store={store}>
       <ModalProvider>
         <div
           style={{
             padding: 50,
-            paddingTop: 100
+            paddingTop: 100,
           }}
         >
           <div
