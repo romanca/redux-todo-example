@@ -16,7 +16,7 @@ const AddTicketModalContent = ({
   const projects = useProjects();
   const [values, setValues] = useState({
     title: "",
-    projectId: getInitialProjectId(projects).id,
+    projectId: getInitialProjectId(projects),
   });
 
   useEffect(() => {
