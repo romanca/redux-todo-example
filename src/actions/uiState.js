@@ -5,17 +5,18 @@ export const actions = {
 
 export const uiStateFields = {
   projectsOpened: "projectsOpened",
+  labelsOpened: "labelsOpened",
 };
 
-export function toggleProjectsMenuItem(value) {
+export function setUiStateField(field, value) {
   return async (dispatch, _, { apiMethods }) => {
     dispatch({
       type: actions.SET_UI_STATE_FIELD,
-      field: uiStateFields.projectsOpened,
+      field,
       value,
     });
     try {
-      await apiMethods.updateUiState({ [uiStateFields.projectsOpened]: value });
+      await apiMethods.updateUiState({ [field]: value });
     } catch (err) {
       // TODO handle error
     }

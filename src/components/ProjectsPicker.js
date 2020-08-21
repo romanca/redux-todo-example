@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import ContextMenu from "./ContextMenu";
-import {connect} from "react-redux"
+import { useSelector } from "react-redux";
 
-const ProjectsPicker = ({projects}) => {
-  const [value, setValue] = useState(projects[0]);
+function useProjectById(id) {
+  const project = useSelector((state) =>
+    state.projects.projects.find((i) => i.id === id)
+  );
+  return project
+}
 
+const ProjectsPicker = ({ onChange, value, projects }) => {
   const handleClick = (item) => {
-    setValue(item);
+    onChange(item);
   };
 
+  const foundProject = useProjectById(value);
+
   return (
-    <ContextMenu items={projects} onItemClick={handleClick} id="PROJECTS_PICKER" >
+    <ContextMenu
+      items={projects}
+      onItemClick={handleClick}
+      id="PROJECTS_PICKER"
+    >
       <div
         style={{
           display: "flex",
@@ -22,24 +33,23 @@ const ProjectsPicker = ({projects}) => {
           cursor: "pointer",
         }}
       >
-        <div
-          style={{
-            width: 10,
-            height: 10,
-            backgroundColor: value.color,
-            borderRadius: 10,
-            marginRight: 5,
-          }}
-        />
-        {value.label}
+        {foundProject && (
+          <>
+            <div
+              style={{
+                width: 10,
+                height: 10,
+                backgroundColor: foundProject.color,
+                borderRadius: 10,
+                marginRight: 5,
+              }}
+            />
+            {foundProject.label}
+          </>
+        )}
       </div>
     </ContextMenu>
   );
 };
-function mapStateToProps(state) {
-  return {
-    projects: state.projects.projects,
-  };
-}
 
-export default connect(mapStateToProps, null)(ProjectsPicker);
+export default ProjectsPicker;

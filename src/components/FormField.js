@@ -7,14 +7,14 @@ export const FORM_FILED_TYPES = {
   PROJECTS_PICKER: "PROJECTS_PICKER",
 };
 
-const FormField = ({ type, onChange, value, label, error }) => {
+const FormField = ({ type, onChange, value, label, error, items }) => {
   switch (type) {
     case FORM_FILED_TYPES.PROJECTS_PICKER:
       return (
         <div>
-          <ProjectsPicker />
+          <ProjectsPicker onChange={onChange} value={value} projects={items} />
         </div>
-      )
+      );
     case FORM_FILED_TYPES.COLOR_PICKER:
       return (
         <div>

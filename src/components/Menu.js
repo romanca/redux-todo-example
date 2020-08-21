@@ -1,9 +1,8 @@
 import React from "react";
 import MenuItem from "./MenuItem";
 import { MENU_ACTION_BUTTON_TYPES } from "./MenuItemRightButton";
-import { connect } from "react-redux";
-import { isProjectMenuOpened } from "../selectors";
-import { toggleProjectsMenuItem } from "../actions/uiState";
+import { uiStateFields } from '../actions/uiState';
+import { useUiStateFieldAPI, useProjects } from "../selectors";
 
 const labels = [
   {
@@ -32,7 +31,10 @@ const labels = [
   },
 ];
 
-const Menu = ({ projects, projectMenuOpened, toggleProjectMenu }) => {
+const Menu = () => {
+  const [projectsOpened, setProjectsOpened] = useUiStateFieldAPI(uiStateFields.projectsOpened);
+  const [labelsOpened, setLabelsOpened] = useUiStateFieldAPI(uiStateFields.labelsOpened);
+  const projects = useProjects();
   return (
     <div
       style={{
@@ -51,8 +53,8 @@ const Menu = ({ projects, projectMenuOpened, toggleProjectMenu }) => {
       }}
     >
       <MenuItem
-        opened={projectMenuOpened}
-        onToggle={toggleProjectMenu}
+        opened={projectsOpened}
+        onToggle={setProjectsOpened}
         item={{
           label: "Projects",
           items: projects.map((i) => ({
@@ -64,6 +66,8 @@ const Menu = ({ projects, projectMenuOpened, toggleProjectMenu }) => {
         itemType="PROJECTS"
       />
       <MenuItem
+        opened={labelsOpened}
+        onToggle={setLabelsOpened}
         item={{
           label: "Labels",
           items: labels,
@@ -75,19 +79,5 @@ const Menu = ({ projects, projectMenuOpened, toggleProjectMenu }) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    projects: state.projects.projects,
-    projectMenuOpened: isProjectMenuOpened(state)
-  };
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-    toggleProjectMenu: value => {
-      dispatch(toggleProjectsMenuItem(value))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default Menu;

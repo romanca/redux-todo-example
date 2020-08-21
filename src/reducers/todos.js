@@ -1,13 +1,7 @@
 import { TODO_ACTIONS } from "../actions/todos";
 
 const initialState = {
-  data: [
-    {
-      title: "Something",
-      id: "asdsfsf1",
-      label: "some label",
-    },
-  ],
+  data: [],
 };
 
 export default function (state = initialState, action) {
