@@ -1,0 +1,4 @@
+- Static Inbox project
+  - Set inbox project as a default project for every todo
+- Label picker
+  - We should reuse ProjectsPicker and refactor it so it can select Multiple values (with checkboxes rendered next to every item)
