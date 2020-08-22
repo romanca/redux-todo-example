@@ -1,6 +1,8 @@
 import React from "react";
 import MenuItemRightButton from "./MenuItemRightButton";
 import { useHover } from "../hooks";
+import ArrowRightIcon from "./Icons/ArrowRightIcon";
+import ArrowDownIcon from "./Icons/AroowDownIcon";
 
 const MenuItem = ({ item, itemType, opened, onToggle }) => {
   const { listeners, hovered } = useHover();
@@ -26,7 +28,7 @@ const MenuItem = ({ item, itemType, opened, onToggle }) => {
 
   const renderLeftIcon = () => {
     if (item.items) {
-      return `>`;
+      return opened ? <ArrowDownIcon /> : <ArrowRightIcon />;
     }
     return (
       <div
@@ -67,7 +69,13 @@ const MenuItem = ({ item, itemType, opened, onToggle }) => {
         </div>
       </div>
       {hasSubItems ? (
-        <div style={{ height: subItemsHeight, overflow: "hidden", transition: "height 0.3s" }}>
+        <div
+          style={{
+            height: subItemsHeight,
+            overflow: "hidden",
+            transition: "height 0.3s",
+          }}
+        >
           {item.items.map((i) => (
             <MenuItem key={i.id} itemType={itemType} item={i} />
           ))}
