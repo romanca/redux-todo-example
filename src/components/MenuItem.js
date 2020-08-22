@@ -3,9 +3,20 @@ import MenuItemRightButton from "./MenuItemRightButton";
 import { useHover } from "../hooks";
 import ArrowRightIcon from "./Icons/ArrowRightIcon";
 import ArrowDownIcon from "./Icons/AroowDownIcon";
+import { useTheme } from "../Theme/colors";
 
-const MenuItem = ({ item, itemType, opened, onToggle }) => {
+const MenuItem = ({
+  item,
+  itemType,
+  opened,
+  onToggle,
+  customLeftIcon,
+  rightIconVisible,
+  isSubItem
+}) => {
   const { listeners, hovered } = useHover();
+
+  const { colors: { hoverBackground } } = useTheme();
 
   const toggleOpened = () => {
     onToggle(!opened);
@@ -27,6 +38,9 @@ const MenuItem = ({ item, itemType, opened, onToggle }) => {
   };
 
   const renderLeftIcon = () => {
+    if (customLeftIcon) {
+      return customLeftIcon;
+    }
     if (item.items) {
       return opened ? <ArrowDownIcon /> : <ArrowRightIcon />;
     }
@@ -43,7 +57,18 @@ const MenuItem = ({ item, itemType, opened, onToggle }) => {
     );
   };
 
-  const color = hovered ? "grey" : "black";
+  const color = hovered && !isSubItem ? "grey" : "black";
+  const backgroundColor = hovered && isSubItem ? hoverBackground : 'unset';
+
+  const isRightIconVisible = () => {
+    if (!rightIconVisible) {
+      return false;
+    };
+    if (isSubItem) {
+      return hovered;
+    }
+    return true;
+  };
 
   return (
     <div
@@ -52,6 +77,7 @@ const MenuItem = ({ item, itemType, opened, onToggle }) => {
         marginLeft: 20,
         borderBottom,
         cursor: "pointer",
+        backgroundColor
       }}
     >
       <div style={{ padding: "10px 0" }}>
@@ -64,8 +90,10 @@ const MenuItem = ({ item, itemType, opened, onToggle }) => {
           }}
         >
           {renderLeftIcon()}
-          <div style={{ marginLeft: 5, color }}>{item.label}</div>
-          <MenuItemRightButton type={item.rightButtonType} itemId={item.id} />
+          <div style={{ marginLeft: 15, color }}>{item.label}</div>
+          {isRightIconVisible() && (
+            <MenuItemRightButton type={item.rightButtonType} itemId={item.id} />
+          )}
         </div>
       </div>
       {hasSubItems ? (
@@ -77,7 +105,13 @@ const MenuItem = ({ item, itemType, opened, onToggle }) => {
           }}
         >
           {item.items.map((i) => (
-            <MenuItem key={i.id} itemType={itemType} item={i} />
+            <MenuItem
+              isSubItem={true}
+              key={i.id}
+              itemType={itemType}
+              item={i}
+              rightIconVisible={rightIconVisible}
+            />
           ))}
         </div>
       ) : null}

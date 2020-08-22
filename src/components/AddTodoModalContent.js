@@ -4,10 +4,6 @@ import Space from "./Space";
 import { useProjects } from "../selectors";
 import { get } from "lodash";
 
-function getInitialProjectId(projects) {
-  return projects && projects.length ? projects[0].id : null;
-}
-
 const AddTicketModalContent = ({
   onContentValuesChange,
   errors,
@@ -16,7 +12,7 @@ const AddTicketModalContent = ({
   const projects = useProjects();
   const [values, setValues] = useState({
     title: "",
-    projectId: getInitialProjectId(projects),
+    projectId: null,
   });
 
   useEffect(() => {

@@ -9,10 +9,18 @@ const Button = ({ label, onClick, backgroundColor }) => {
 };
 
 const Modal = ({ modalContent, onRequestClose, visible }) => {
-  const { title, content, actions, validate, small, initialValues } = modalContent;
+  const {
+    title,
+    content,
+    actions,
+    validate,
+    small,
+    initialValues,
+  } = modalContent;
 
   const [contentValues, setContentValues] = useState({});
   const [errors, setErrors] = useState({});
+  const [submitAttempt, setSubmitAttempt] = useState(false);
 
   const onContentValuesChange = (values) => {
     let newErrors = null;
@@ -25,6 +33,7 @@ const Modal = ({ modalContent, onRequestClose, visible }) => {
 
   const getActionClickHandler = (action) => () => {
     if (action.type === "CONTENT_CONFIRMATION") {
+      setSubmitAttempt(true);
       let newErrors = null;
       if (validate) {
         newErrors = validate(contentValues);
@@ -84,8 +93,8 @@ const Modal = ({ modalContent, onRequestClose, visible }) => {
             content({
               actions,
               onContentValuesChange,
-              errors,
-              initialValues
+              errors: submitAttempt ? errors : {},
+              initialValues,
             })}
         </div>
         <div

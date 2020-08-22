@@ -1,8 +1,9 @@
 import React from "react";
 import MenuItem from "./MenuItem";
-import { MENU_ACTION_BUTTON_TYPES } from "./MenuItemRightButton";
-import { uiStateFields } from '../actions/uiState';
+import { uiStateFields } from "../actions/uiState";
 import { useUiStateFieldAPI, useProjects } from "../selectors";
+import { staticMenuItems, MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
+import { useHover } from "../hooks";
 
 const labels = [
   {
@@ -32,11 +33,19 @@ const labels = [
 ];
 
 const Menu = () => {
-  const [projectsOpened, setProjectsOpened] = useUiStateFieldAPI(uiStateFields.projectsOpened);
-  const [labelsOpened, setLabelsOpened] = useUiStateFieldAPI(uiStateFields.labelsOpened);
+  const [projectsOpened, setProjectsOpened] = useUiStateFieldAPI(
+    uiStateFields.projectsOpened
+  );
+  const [labelsOpened, setLabelsOpened] = useUiStateFieldAPI(
+    uiStateFields.labelsOpened
+  );
   const projects = useProjects();
+
+  const { hovered, listeners } = useHover();
+
   return (
     <div
+      {...listeners}
       style={{
         width: 200,
         height: "fit-content",
@@ -52,7 +61,18 @@ const Menu = () => {
         paddingRight: 20,
       }}
     >
+      {staticMenuItems.map((i) => (
+        <MenuItem
+          isSubItem={true}
+          rightIconVisible={hovered}
+          key={i.id}
+          item={i}
+          customLeftIcon={i.icon}
+          itemType="PROJECTS"
+        />
+      ))}
       <MenuItem
+        rightIconVisible={hovered}
         opened={projectsOpened}
         onToggle={setProjectsOpened}
         item={{
@@ -66,6 +86,7 @@ const Menu = () => {
         itemType="PROJECTS"
       />
       <MenuItem
+        rightIconVisible={hovered}
         opened={labelsOpened}
         onToggle={setLabelsOpened}
         item={{
@@ -78,6 +99,5 @@ const Menu = () => {
     </div>
   );
 };
-
 
 export default Menu;

@@ -1,6 +1,8 @@
 import React from "react";
 import { useHover } from "../hooks";
 import ContextMenu from "./ContextMenu";
+import DottedMenuIcon from "./Icons/DottedMenuIcon";
+import PlusIcon from "./Icons/PlusIcon";
 
 export const ICON_BUTTON_TYPES = {
   PLUS: "PLUS",
@@ -35,20 +37,13 @@ const IconButton = ({ type, onClick, contextMenuId, items }) => {
       return (
         <ContextMenu onItemClick={onClick} id={contextMenuId} items={items}>
           <div
-            {...listeners}
             style={{
-              padding: "0 5px",
-              backgroundColor,
               position: "absolute",
               right: 0,
               top: 0,
             }}
           >
-            <div style={{ lineHeight: 0.2, fontSize: 20, height: 20 }}>
-              <div>.</div>
-              <div>.</div>
-              <div>.</div>
-            </div>
+            <DottedMenuIcon />
           </div>
         </ContextMenu>
       );
@@ -66,7 +61,7 @@ const IconButton = ({ type, onClick, contextMenuId, items }) => {
             top: 0,
           }}
         >
-          <div>+</div>
+          <PlusIcon />
         </div>
       );
     default:

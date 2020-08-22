@@ -1,24 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ContextMenu from "./ContextMenu";
 import { useSelector } from "react-redux";
+import { getDefaultProjectForPicker } from "../utils/utils";
+import { staticMenuItems } from "../utils/Constants";
 
 function useProjectById(id) {
   const project = useSelector((state) =>
     state.projects.projects.find((i) => i.id === id)
   );
-  return project
+  return project;
+}
+
+function createProjectPickerActionItems() {
+  return [
+    {
+      label: "Add new project",
+      actionType: "NEW_PROJECT",
+      if: 'NEW_PROJECT'
+    },
+  ];
 }
 
 const ProjectsPicker = ({ onChange, value, projects }) => {
   const handleClick = (item) => {
-    onChange(item);
+    if (item.actionType) {
+      alert(item.actionType);
+    } else {
+      onChange(item);
+    }
   };
+
+  useEffect(() => {
+    onChange(getDefaultProjectForPicker());
+  }, []);
 
   const foundProject = useProjectById(value);
 
+  const displayedProject = foundProject || getDefaultProjectForPicker();
+
+
   return (
     <ContextMenu
-      items={projects}
+      items={[
+        ...staticMenuItems,
+        ...projects,
+        ...createProjectPickerActionItems(),
+      ]}
       onItemClick={handleClick}
       id="PROJECTS_PICKER"
     >
@@ -33,18 +60,18 @@ const ProjectsPicker = ({ onChange, value, projects }) => {
           cursor: "pointer",
         }}
       >
-        {foundProject && (
+        {displayedProject && (
           <>
             <div
               style={{
                 width: 10,
                 height: 10,
-                backgroundColor: foundProject.color,
+                backgroundColor: displayedProject.color,
                 borderRadius: 10,
                 marginRight: 5,
               }}
             />
-            {foundProject.label}
+            {displayedProject.label}
           </>
         )}
       </div>

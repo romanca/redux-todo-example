@@ -10,7 +10,7 @@ const Item = ({ item, onClick }) => {
   const { listeners, hovered } = useHover();
   const backgroundColor = hovered ? "lightGray" : "";
   return (
-    <MenuItem data={{ foo: "bar" }} onClick={() => {}}>
+    <MenuItem onClick={() => {}}>
       <div
         onClick={() => {
           onClick(item);
@@ -21,6 +21,7 @@ const Item = ({ item, onClick }) => {
           borderBottom: "1px solid black",
           backgroundColor,
           cursor: "pointer",
+          minWidth: 150
         }}
       >
         {item.label}
@@ -31,23 +32,25 @@ const Item = ({ item, onClick }) => {
 
 const ContextMenu = ({ children, items, onItemClick, id, menuContent }) => {
   return (
-    <div style={{ width: 'fit-content' }}>
+    <div style={{ width: "fit-content" }}>
       <ContextMenuTrigger id={id} mouseButton={0}>
         {children}
       </ContextMenuTrigger>
       <ContextMenuRaw
+        hideOnLeave={false}
         id={id}
         style={{
           border: "1px solid black",
           backgroundColor: "white",
           borderBottomWidth: 0,
-          zIndex: 9999
+          zIndex: 9999,
         }}
       >
         {menuContent && menuContent}
-        {items && items.map((i, index) => (
-          <Item key={index} item={i} onClick={onItemClick} />
-        ))}
+        {items &&
+          items.map((i, index) => (
+            <Item key={index} item={i} onClick={onItemClick} />
+          ))}
       </ContextMenuRaw>
     </div>
   );

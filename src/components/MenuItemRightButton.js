@@ -1,13 +1,7 @@
 import React from "react";
 import { useProjectEditModal } from "../hooks";
 import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
-
-export const MENU_ACTION_BUTTON_TYPES = {
-  ADD_PROJECT: "ADD_PROJECT",
-  ADD_LABEL: "ADD_LABEL",
-  PROJECTS_HAMBURGER: "PROJECTS_HAMBURGER",
-  LABEL_HAMBURGER: "LABEL_HAM",
-};
+import { MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
 
 const HAMBURGER_ITEMS = [
   {
