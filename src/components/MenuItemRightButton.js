@@ -23,6 +23,9 @@ const MenuItemRightButton = ({ type, itemId }) => {
       case MENU_ACTION_BUTTON_TYPES.ADD_LABEL:
         openProjectsModal();
         break;
+      case MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER:
+        console.log(itemId);
+        break
       default:
         return null;
     }
@@ -37,7 +40,7 @@ const MenuItemRightButton = ({ type, itemId }) => {
       return (
         <IconButton
           type={ICON_BUTTON_TYPES.CONTEXT_MENU}
-          onClick={() => {}}
+          onClick={(_, event) => handleClick(event)}
           contextMenuId={`CONTEXT_MENU_${MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER}_${itemId}`}
           items={HAMBURGER_ITEMS}
         />

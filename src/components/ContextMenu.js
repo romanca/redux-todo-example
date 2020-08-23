@@ -12,8 +12,8 @@ const Item = ({ item, onClick }) => {
   return (
     <MenuItem onClick={() => {}}>
       <div
-        onClick={() => {
-          onClick(item);
+        onClick={(event) => {
+          onClick(item, event);
         }}
         {...listeners}
         style={{
