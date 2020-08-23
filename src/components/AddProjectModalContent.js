@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormField, { FORM_FILED_TYPES } from "./FormField";
 import Space from "./Space";
 
-const AddProjectModalContent = ({ onContentValuesChange }) => {
+const AddProjectModalContent = ({ onContentValuesChange, initialValues }) => {
   const [values, setValues] = useState({ label: "", color: "blue" });
+
+  useEffect(() => {
+    if (initialValues) {
+      setValues(initialValues);
+      onContentValuesChange(initialValues);
+    }
+  }, [initialValues]);
+
   const getFieldChangeHandler = (field) => (e) => {
     const newValues = {
       ...values,

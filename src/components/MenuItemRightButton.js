@@ -2,6 +2,7 @@ import React from "react";
 import { useProjectEditModal } from "../hooks";
 import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
 import { MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
+import { useIndexedProjects } from "../selectors";
 
 const HAMBURGER_ITEMS = [
   {
@@ -13,8 +14,9 @@ const HAMBURGER_ITEMS = [
 ];
 
 const MenuItemRightButton = ({ type, itemId }) => {
-
   const openProjectsModal = useProjectEditModal();
+
+  const indexedProjects = useIndexedProjects();
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -24,8 +26,8 @@ const MenuItemRightButton = ({ type, itemId }) => {
         openProjectsModal();
         break;
       case MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER:
-        console.log(itemId);
-        break
+        openProjectsModal({ initialValues: indexedProjects[itemId] });
+        break;
       default:
         return null;
     }
