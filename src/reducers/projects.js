@@ -20,8 +20,21 @@ function updateItemOnArray(data, keyPath, item) {
   );
 }
 
+function removeItemFromArray(data, keyPath, key) {
+  return data.filter((i) => i[keyPath] !== key);
+}
+
 export default function (state = initialState, action) {
   switch (action.type) {
+    case PROJECTS_ACTIONS.REMOVE_PROJECT:
+      return {
+        ...state,
+        projects: removeItemFromArray(state.projects, 'id', action.payload),
+        indexedProjects: {
+          ...state.indexedProjects,
+          [action.payload]: undefined
+        }
+      };
     case PROJECTS_ACTIONS.UPDATE_PROJECT:
       return {
         ...state,

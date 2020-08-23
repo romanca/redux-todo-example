@@ -13,6 +13,12 @@ function createIdForItem(item) {
 }
 
 class ApiMethods {
+  removeProject = async id => {
+    const projects = await this.getProjects();
+    const newProjects = projects.filter((i) => i.id !== id);
+    setItemToLS(LS_KEYS.projects, newProjects);
+    return Promise.resolve();
+  }
   updateProject = async (project) => {
     const projects = await this.getProjects();
     const newProjects = projects.map((i) =>
