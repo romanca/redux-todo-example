@@ -1,8 +1,8 @@
 import React from "react";
 import MenuItem from "./MenuItem";
 import { uiStateFields } from "../actions/uiState";
-import { useUiStateFieldAPI, useProjects } from "../selectors";
-import { staticMenuItems, MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
+import { useUiStateFieldAPI, useProjects, useStaticProjects } from "../selectors";
+import { MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
 import { useHover } from "../hooks";
 
 const labels = [
@@ -40,6 +40,7 @@ const Menu = () => {
     uiStateFields.labelsOpened
   );
   const projects = useProjects();
+  const staticProjects = useStaticProjects();
 
   const { hovered, listeners } = useHover();
 
@@ -61,10 +62,9 @@ const Menu = () => {
         paddingRight: 20,
       }}
     >
-      {staticMenuItems.map((i) => (
+      {staticProjects.map((i) => (
         <MenuItem
           isSubItem={true}
-          rightIconVisible={hovered}
           key={i.id}
           item={i}
           customLeftIcon={i.icon}
