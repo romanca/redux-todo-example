@@ -58,7 +58,6 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
       <div style={{ flex: 1 }}>{item.title}</div>
       <div
         style={{
-          backgroundColor: "red",
           width: 10,
           height: 10,
           position: "relative",

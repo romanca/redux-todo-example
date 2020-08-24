@@ -9,6 +9,7 @@ import ReduxThunk from "redux-thunk";
 import apiMethods from "./utils/apiMethods";
 import { getAllProjects } from "./actions/projects";
 import { getUiState } from "./actions/uiState";
+import {getAllTodos} from "./actions/todos";
 
 const store = createStore(
   rootReducer,
@@ -20,6 +21,7 @@ const store = createStore(
 
 store.dispatch(getAllProjects());
 store.dispatch(getUiState());
+store.dispatch(getAllTodos());
 
 function App() {
   return (

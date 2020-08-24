@@ -53,6 +53,11 @@ export default function (state = initialState, action) {
         ...state,
         ...editTodo(state, action.payload),
       };
+    case TODO_ACTIONS.FETCH_TODOS_FINNISH:
+      return {
+        ...state,
+        data: action.payload,
+      };
     default:
       return state;
   }
