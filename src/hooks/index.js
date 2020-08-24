@@ -2,29 +2,39 @@ import React, { useState } from "react";
 import { useModal } from "../Providers/ModalProvider";
 import AddProjectModalContent from "../components/AddProjectModalContent";
 import AddTicketModalContent from "../components/AddTodoModalContent";
-import { useDispatch } from 'react-redux';
-import { createProject } from "../actions/projects";
+import { useDispatch } from "react-redux";
+import { createProject, editProject } from "../actions/projects";
 
 export const useProjectEditModal = () => {
   const { setModal, closeModal } = useModal();
   const dispatch = useDispatch();
-  return () => {
+  return ({ initialValues } = {}) => {
     setModal({
       opened: true,
+      initialValues,
       title: "Project creation",
       content: AddProjectModalContent,
+      validate: (values) => {
+        const errors = {};
+        if (!values.label) {
+          errors.label = "Requuired";
+        }
+        return errors;
+      },
       actions: [
         {
           label: "Cancel",
           requestClose: true,
         },
         {
-          label: "Add",
+          label: initialValues ? "Edit" : "Add",
           type: "CONTENT_CONFIRMATION",
           onClick: ({ values }) => {
-            dispatch(
-             createProject(values)
-            );
+            if (!initialValues) {
+              dispatch(createProject(values));
+            } else {
+              dispatch(editProject(values));
+            }
             closeModal();
           },
         },

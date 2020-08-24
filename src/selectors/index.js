@@ -17,3 +17,7 @@ export function useUiStateFieldAPI(field) {
 export function useProjects() {
   return useSelector((state) => state.projects.projects);
 }
+
+export function useIndexedProjects() {
+  return useSelector((state) => state.projects.indexedProjects);
+}

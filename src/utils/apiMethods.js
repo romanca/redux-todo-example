@@ -33,6 +33,19 @@ class ApiMethods {
     const todos = await this.getTodos();
     const editedTodos = todos.map((i) => (i.id === todo.id ? todo : i));
     setItemToLS(LS_KEYS.todos, editedTodos);
+  };
+  removeProject = async (id) => {
+    const projects = await this.getProjects();
+    const newProjects = projects.filter((i) => i.id !== id);
+    setItemToLS(LS_KEYS.projects, newProjects);
+    return Promise.resolve();
+  };
+  updateProject = async (project) => {
+    const projects = await this.getProjects();
+    const newProjects = projects.map((i) =>
+      i.id === project.id ? { ...i, ...project } : i
+    );
+    setItemToLS(LS_KEYS.projects, newProjects);
     return Promise.resolve();
   };
   getProjects = () => getKeyFromLs(LS_KEYS.projects, []);
