@@ -20,13 +20,13 @@ export function createTodo(todo) {
   };
 }
 
-export function removeTodo(id) {
+export function removeTodo(payload) {
   return async (dispatch, _, { apiMethods }) => {
     try {
-      await apiMethods.removeTodo(id);
+      await apiMethods.removeTodo(payload.id);
       dispatch({
         type: TODO_ACTIONS.REMOVE_TODO,
-        payload: id,
+        payload,
       });
     } catch (err) {}
   };

@@ -29,7 +29,7 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
           title: "Todo Removal",
           message: "Are you sure you want to remove this task?",
           onConfirm: () => {
-            onTodoRemoved(item.id);
+            onTodoRemoved(item);
           },
         });
         break;
