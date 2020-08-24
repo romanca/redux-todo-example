@@ -4,15 +4,16 @@ import { uiStateFields } from "../actions/uiState";
 import { useUiStateFieldAPI, useProjects, useStaticProjects } from "../selectors";
 import { MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
 import { useHover } from "../hooks";
+import {useSelector} from "react-redux"
 
-const labels = [
-  {
-    label: "Label One",
-    id: "1",
-    color: "blue",
-    rightButtonType: MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER,
-  }
-];
+// Create reducers
+// Render mocked data fro reducer
+// Create functionality
+// Delete functionality
+
+function useLabels (){
+  return useSelector((state)=>state.labels.labels)
+}
 
 const Menu = () => {
   const [projectsOpened, setProjectsOpened] = useUiStateFieldAPI(
@@ -21,6 +22,7 @@ const Menu = () => {
   const [labelsOpened, setLabelsOpened] = useUiStateFieldAPI(
     uiStateFields.labelsOpened
   );
+  const labels = useLabels();
   const projects = useProjects();
   const staticProjects = useStaticProjects();
 
