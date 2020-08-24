@@ -2,9 +2,10 @@ export const TODO_ACTIONS = {
   CREATE_TODO: "CREATE_TODO",
   REMOVE_TODO: "REMOVE_TODO",
   EDIT_TODO: "EDIT_TODO",
-  FETCH_TODOS_FINNISH: "FETCH_TODOS",
-  FETCH_TODOS_START: "FETCH_TODOS",
+  FETCH_TODOS_FINNISH: "FETCH_TODOS_FINNISH",
+  FETCH_TODOS_START: "FETCH_TODOS_START",
 };
+
 export function createTodo(todo) {
   return async (dispatch, _, { apiMethods }) => {
     try {
@@ -18,6 +19,7 @@ export function createTodo(todo) {
     }
   };
 }
+
 export function removeTodo(id) {
   return async (dispatch, _, { apiMethods }) => {
     try {
@@ -29,6 +31,19 @@ export function removeTodo(id) {
     } catch (err) {}
   };
 }
+
+export function editTodo(payload) {
+  return async (dispatch, _, { apiMethods }) => {
+    try {
+      await apiMethods.editTodo(payload);
+      dispatch({
+        type: TODO_ACTIONS.EDIT_TODO,
+        payload,
+      });
+    } catch (err) {}
+  };
+}
+
 export function getAllTodos() {
   return async (dispatch, _, { apiMethods }) => {
     dispatch({
@@ -46,12 +61,5 @@ export function getAllTodos() {
         payload: [],
       });
     }
-  };
-}
-
-export function editTodo(payload) {
-  return {
-    type: TODO_ACTIONS.EDIT_TODO,
-    payload,
   };
 }

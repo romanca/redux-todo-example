@@ -24,16 +24,16 @@ class ApiMethods {
   getTodos = () => getKeyFromLs(LS_KEYS.todos, []);
   removeTodo = async (id) => {
     const todos = await this.getTodos();
-    const newTodos = todos.filter((i) => i.id !== id);
+    const newTodos = todos.filter((newTodo) => newTodo.id !== id);
     setItemToLS(LS_KEYS.todos, newTodos);
-    return Promise.resolve()
+    return Promise.resolve();
   };
-
-  editTodo = (todo) => {
-    // get all todos
-    // create new todos array with updated item
-    // set this new array to LS
-    // Return resolved promise
+  getTodos = () => getKeyFromLs(LS_KEYS.todos, []);
+  editTodo = async (todo) => {
+    const todos = await this.getTodos();
+    const editedTodos = todos.map((i) => (i.id === todo.id ? todo : i));
+    setItemToLS(LS_KEYS.todos, editedTodos);
+    return Promise.resolve();
   };
   getProjects = () => getKeyFromLs(LS_KEYS.projects, []);
   createProject = async (data) => {

@@ -23,6 +23,11 @@ export default function (state = initialState, action) {
           i.id === action.payload.id ? action.payload : i
         ),
       };
+    case TODO_ACTIONS.FETCH_TODOS_FINNISH:
+      return {
+        ...state,
+        data: action.payload,
+      };
     default:
       return state;
   }
