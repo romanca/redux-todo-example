@@ -11,25 +11,7 @@ const labels = [
     id: "1",
     color: "blue",
     rightButtonType: MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER,
-  },
-  {
-    label: "Label Two",
-    id: "2",
-    color: "blue",
-    rightButtonType: MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER,
-  },
-  {
-    label: "Label Three",
-    id: "3",
-    color: "blue",
-    rightButtonType: MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER,
-  },
-  {
-    label: "Label Four",
-    id: "4",
-    color: "blue",
-    rightButtonType: MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER,
-  },
+  }
 ];
 
 const Menu = () => {
@@ -50,7 +32,7 @@ const Menu = () => {
       style={{
         width: 200,
         height: "fit-content",
-        minHeight: 300,
+        minHeight: 400,
         border: "1px solid rgba(0,0,0,0.49)",
         borderRadius: 20,
         marginRight: 30,
@@ -60,6 +42,7 @@ const Menu = () => {
         paddingTop: 20,
         paddingBottom: 20,
         paddingRight: 20,
+        position: "relative"
       }}
     >
       {staticProjects.map((i) => (

@@ -3,8 +3,8 @@ import MenuItemRightButton from "./MenuItemRightButton";
 import { useHover } from "../hooks";
 import ArrowRightIcon from "./Icons/ArrowRightIcon";
 import ArrowDownIcon from "./Icons/AroowDownIcon";
-import { useTheme } from "../Theme/colors";
 import { useCurrentViewUpdater } from "../Dispatchers";
+import { useTheme } from "../Theme";
 
 const MenuItem = React.memo(
   ({
@@ -15,12 +15,15 @@ const MenuItem = React.memo(
     customLeftIcon,
     rightIconVisible,
     isSubItem,
-    log,
   }) => {
-    const { listeners, hovered } = useHover();
+    const { listeners, hovered: firstHovered } = useHover();
+    const { listeners: secondListeners, hovered: secondHovered } = useHover();
+
+    const hovered = firstHovered || secondHovered;
 
     const {
       colors: { hoverBackground },
+      sizes: { menuItemHeight },
     } = useTheme();
 
     const updateCurrentView = useCurrentViewUpdater();
@@ -31,7 +34,7 @@ const MenuItem = React.memo(
 
     const hasSubItems = item.items && item.items.length;
 
-    const borderBottom = opened ? "" : "1px solid black";
+    const borderBottom = isSubItem ? "" : "0.5px solid lightgrey";
 
     const subItemsHeight = !hasSubItems || !opened ? 0 : item.items.length * 38;
 
@@ -64,7 +67,6 @@ const MenuItem = React.memo(
       );
     };
 
-    const color = hovered && !isSubItem ? "grey" : "black";
     const backgroundColor = hovered && isSubItem ? hoverBackground : "unset";
 
     const isRightIconVisible = () => {
@@ -84,12 +86,27 @@ const MenuItem = React.memo(
           marginLeft: 20,
           borderBottom,
           cursor: "pointer",
-          backgroundColor,
         }}
       >
-        <div style={{ padding: "10px 0" }}>
+        <div
+          {...listeners}
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: menuItemHeight,
+            backgroundColor,
+            left: 0,
+          }}
+        />
+        <div
+          {...secondListeners}
+          style={{
+            padding: "10px 0",
+            maxHeight: menuItemHeight,
+            borderBottom: opened ? borderBottom : "",
+          }}
+        >
           <div
-            {...listeners}
             style={{
               display: "flex",
               alignItems: "center",
@@ -97,7 +114,13 @@ const MenuItem = React.memo(
             }}
           >
             {renderLeftIcon()}
-            <div style={{ marginLeft: 15, color, display: "flex" }}>
+            <div
+              style={{
+                marginLeft: isSubItem ? 5 : 15,
+                display: "flex",
+                fontWeight: !isSubItem ? "bold" : "normal",
+              }}
+            >
               {item.label}
               {item.activeTodos > 0 && (
                 <div
@@ -112,6 +135,7 @@ const MenuItem = React.memo(
                 </div>
               )}
             </div>
+            <div style={{ flex: 1 }} />
             {isRightIconVisible() && (
               <MenuItemRightButton
                 type={item.rightButtonType}
@@ -126,6 +150,7 @@ const MenuItem = React.memo(
               height: subItemsHeight,
               overflow: "hidden",
               transition: "height 0.3s",
+              paddingBottom: 2,
             }}
           >
             {item.items.map((i) => (

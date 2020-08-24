@@ -12,7 +12,11 @@ export const staticMenuItems = [
   {
     label: "Inbox",
     id: "INBOX_TODOS",
-    icon: <InboxIcon />,
+    icon: (
+      <div style={{ marginRight: 10, display: "flex", alignItems: "center" }}>
+        <InboxIcon />
+      </div>
+    ),
     color: "grey",
   },
 ];

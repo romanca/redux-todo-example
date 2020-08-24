@@ -21,7 +21,7 @@ const Item = ({ item, onClick }) => {
           borderBottom: "1px solid black",
           backgroundColor,
           cursor: "pointer",
-          minWidth: 150
+          minWidth: 150,
         }}
       >
         {item.label}
@@ -32,7 +32,7 @@ const Item = ({ item, onClick }) => {
 
 const ContextMenu = ({ children, items, onItemClick, id, menuContent }) => {
   return (
-    <div style={{ width: "fit-content" }}>
+    <>
       <ContextMenuTrigger id={id} mouseButton={0}>
         {children}
       </ContextMenuTrigger>
@@ -52,7 +52,7 @@ const ContextMenu = ({ children, items, onItemClick, id, menuContent }) => {
             <Item key={index} item={i} onClick={onItemClick} />
           ))}
       </ContextMenuRaw>
-    </div>
+    </>
   );
 };
 

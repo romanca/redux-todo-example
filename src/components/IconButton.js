@@ -3,6 +3,7 @@ import { useHover } from "../hooks";
 import ContextMenu from "./ContextMenu";
 import DottedMenuIcon from "./Icons/DottedMenuIcon";
 import PlusIcon from "./Icons/PlusIcon";
+import { useTheme } from "../Theme";
 
 export const ICON_BUTTON_TYPES = {
   PLUS: "PLUS",
@@ -36,14 +37,8 @@ const IconButton = ({ type, onClick, contextMenuId, items }) => {
     case ICON_BUTTON_TYPES.CONTEXT_MENU:
       return (
         <ContextMenu onItemClick={onClick} id={contextMenuId} items={items}>
-          <div
-            style={{
-              position: "absolute",
-              right: 0,
-              top: 0,
-            }}
-          >
-            <DottedMenuIcon />
+          <div style={{ display: "flex" }} {...listeners}>
+            <DottedMenuIcon hovered={hovered} />
           </div>
         </ContextMenu>
       );
@@ -53,15 +48,12 @@ const IconButton = ({ type, onClick, contextMenuId, items }) => {
           onClick={onClick}
           {...listeners}
           style={{
-            padding: "0 5px",
-            height: "fit-content",
-            backgroundColor,
-            position: "absolute",
-            right: 0,
-            top: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          <PlusIcon />
+          <PlusIcon hovered={hovered} />
         </div>
       );
     default:

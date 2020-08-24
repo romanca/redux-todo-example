@@ -1,13 +1,4 @@
-const lightColors = {
+export const lightColors = {
   hoverBackground: "#607d8b1a",
+  hoveredIcon: 'darkgrey'
 };
-
-export function getTheme() {
-  return {
-    colors: lightColors,
-  };
-}
-
-export function useTheme() {
-  return getTheme();
-}
