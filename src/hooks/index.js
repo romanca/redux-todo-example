@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useModal } from "../Providers/ModalProvider";
 import AddProjectModalContent from "../components/AddProjectModalContent";
 import AddTicketModalContent from "../components/AddTodoModalContent";
+import AddEditModalContent from "../components/AddLabelModalContent";
 import { useDispatch } from "react-redux";
 import { createProject, editProject } from "../actions/projects";
+import { createLabel } from "../actions/labels";
 
 export const useProjectEditModal = () => {
   const { setModal, closeModal } = useModal();
@@ -34,6 +36,44 @@ export const useProjectEditModal = () => {
               dispatch(createProject(values));
             } else {
               dispatch(editProject(values));
+            }
+            closeModal();
+          },
+        },
+      ],
+    });
+  };
+};
+
+export const useLabelEditModal = () => {
+  const { setModal, closeModal } = useModal();
+  const dispatch = useDispatch();
+  return ({ initialValues } = {}) => {
+    setModal({
+      opened: true,
+      initialValues,
+      title: "Label creation",
+      content: AddEditModalContent,
+      validate: (values) => {
+        const errors = {};
+        if (!values.label) {
+          errors.label = "Requuired";
+        }
+        return errors;
+      },
+      actions: [
+        {
+          label: "Cancel",
+          requestClose: true,
+        },
+        {
+          label: initialValues ? "Edit" : "Add",
+          type: "CONTENT_CONFIRMATION",
+          onClick: ({ values }) => {
+            if (!initialValues) {
+              dispatch(createLabel(values));
+            } else {
+              // dispatch(editProject(values));
             }
             closeModal();
           },

@@ -2,14 +2,7 @@ import { LABELS_ACTIONS } from "../actions/labels";
 import { MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
 
 const initialState = {
-  labels: [
-    {
-      label: "Label One",
-      id: "1",
-      color: "blue",
-      rightButtonType: MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER,
-    },   
-  ],
+  labels: [],
 };
 
 export default function (state = initialState, action) {
@@ -17,7 +10,17 @@ export default function (state = initialState, action) {
     case LABELS_ACTIONS.CREATE_LABEL:
       return {
         ...state,
-        labels: [...state, action.payload],
+        labels: [...state.labels, action.payload],
+      };
+    case LABELS_ACTIONS.REMOVE_LABEL:
+      return {
+        ...state,
+        labels: state.labels.filter((i) => i.id !== action),
+      };
+    case LABELS_ACTIONS.FETCH_LABELS_FINNISH:
+      return {
+        ...state,
+        labels: action.payload,
       };
     default:
       return state;

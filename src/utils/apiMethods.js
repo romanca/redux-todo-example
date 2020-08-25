@@ -4,6 +4,7 @@ const LS_KEYS = {
   projects: "projects",
   uiState: "uiState",
   todos: "todos",
+  labels: "labels",
 };
 
 function createIdForItem(item) {
@@ -21,14 +22,12 @@ class ApiMethods {
     setItemToLS(LS_KEYS.todos, [...todos, todo]);
     return Promise.resolve({ data: todo });
   };
-  getTodos = () => getKeyFromLs(LS_KEYS.todos, []);
   removeTodo = async (id) => {
     const todos = await this.getTodos();
     const newTodos = todos.filter((newTodo) => newTodo.id !== id);
     setItemToLS(LS_KEYS.todos, newTodos);
     return Promise.resolve();
   };
-  getTodos = () => getKeyFromLs(LS_KEYS.todos, []);
   editTodo = async (todo) => {
     const todos = await this.getTodos();
     const editedTodos = todos.map((i) => (i.id === todo.id ? todo : i));
@@ -55,6 +54,7 @@ class ApiMethods {
     setItemToLS(LS_KEYS.projects, [...projects, project]);
     return Promise.resolve({ data: project });
   };
+
   getUiState = () => getKeyFromLs(LS_KEYS.uiState, null);
   updateUiState = async (updatedValues) => {
     const uiState = await this.getUiState();
@@ -63,6 +63,13 @@ class ApiMethods {
       ...updatedValues,
     });
     return Promise.resolve();
+  };
+  getLabels = () => getKeyFromLs(LS_KEYS.labels, []);
+  createLabel = async (labels) => {
+    const allLabels = await this.getLabels();
+    const label = createIdForItem(labels);
+    setItemToLS(LS_KEYS.labels, [...allLabels, label]);
+    return Promise.resolve({ labels: label });
   };
 }
 

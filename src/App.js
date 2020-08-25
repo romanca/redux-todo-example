@@ -9,7 +9,8 @@ import ReduxThunk from "redux-thunk";
 import apiMethods from "./utils/apiMethods";
 import { getAllProjects } from "./actions/projects";
 import { getUiState } from "./actions/uiState";
-import {getAllTodos} from "./actions/todos";
+import { getAllTodos } from "./actions/todos";
+import { getAllLabels } from "./actions/labels";
 
 const store = createStore(
   rootReducer,
@@ -19,6 +20,7 @@ const store = createStore(
   )
 );
 
+store.dispatch(getAllLabels());
 store.dispatch(getAllProjects());
 store.dispatch(getUiState());
 store.dispatch(getAllTodos());
@@ -31,16 +33,14 @@ function App() {
           style={{
             padding: 50,
             paddingTop: 100,
-          }}
-        >
+          }}>
           <div
             style={{
               display: "flex",
               flexDirection: "row",
               flex: 1,
               justifyContent: "center",
-            }}
-          >
+            }}>
             <div
               style={{
                 maxWidth: "70%",
@@ -48,8 +48,7 @@ function App() {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "center",
-              }}
-            >
+              }}>
               <Menu />
               <Todos />
             </div>
