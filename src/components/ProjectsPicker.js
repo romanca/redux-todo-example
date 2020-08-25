@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import ContextMenu from "./ContextMenu";
 import { useSelector } from "react-redux";
-import { getDefaultProjectForPicker } from "../utils/utils";
 import { staticMenuItems } from "../utils/Constants";
+import { useDefaultProjectForTodoCreation } from "../selectors";
 
 function useProjectById(id) {
   const project = useSelector((state) =>
@@ -22,6 +22,9 @@ function createProjectPickerActionItems() {
 }
 
 const ProjectsPicker = ({ onChange, value, projects }) => {
+
+  const defaultProject = useDefaultProjectForTodoCreation();
+
   const handleClick = (item) => {
     if (item.actionType) {
       alert(item.actionType);
@@ -31,12 +34,12 @@ const ProjectsPicker = ({ onChange, value, projects }) => {
   };
 
   useEffect(() => {
-    onChange(getDefaultProjectForPicker());
+    onChange(defaultProject);
   }, []);
 
   const foundProject = useProjectById(value);
 
-  const displayedProject = foundProject || getDefaultProjectForPicker();
+  const displayedProject = foundProject || defaultProject;
 
 
   return (

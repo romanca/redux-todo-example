@@ -11,6 +11,7 @@ import { getAllProjects } from "./actions/projects";
 import { getUiState } from "./actions/uiState";
 import { getAllTodos } from "./actions/todos";
 import { getAllLabels } from "./actions/labels";
+import ContextMenuProvider from "./Providers/ContextMenuProvider";
 
 const store = createStore(
   rootReducer,
@@ -29,31 +30,36 @@ function App() {
   return (
     <Provider store={store}>
       <ModalProvider>
-        <div
-          style={{
-            padding: 50,
-            paddingTop: 100,
-          }}>
+        <ContextMenuProvider>
           <div
             style={{
-              display: "flex",
-              flexDirection: "row",
-              flex: 1,
-              justifyContent: "center",
-            }}>
+              padding: 50,
+              paddingTop: 100,
+            }}
+          >
             <div
               style={{
-                maxWidth: "70%",
-                flex: 1,
                 display: "flex",
                 flexDirection: "row",
+                flex: 1,
                 justifyContent: "center",
-              }}>
-              <Menu />
-              <Todos />
+              }}
+            >
+              <div
+                style={{
+                  maxWidth: "70%",
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Menu />
+                <Todos />
+              </div>
             </div>
           </div>
-        </div>
+        </ContextMenuProvider>
       </ModalProvider>
     </Provider>
   );
