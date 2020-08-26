@@ -1,18 +1,17 @@
 import React from "react";
 import MenuItem from "./MenuItem";
 import { uiStateFields } from "../actions/uiState";
-import { useUiStateFieldAPI, useProjects, useStaticProjects } from "../selectors";
+import {
+  useUiStateFieldAPI,
+  useProjects,
+  useStaticProjects,
+} from "../selectors";
 import { MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
 import { useHover } from "../hooks";
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux";
 
-// Create reducers
-// Render mocked data fro reducer
-// Create functionality
-// Delete functionality
-
-function useLabels (){
-  return useSelector((state)=>state.labels.labels)
+function useLabels() {
+  return useSelector((state) => state.labels.labels);
 }
 
 const Menu = () => {
@@ -44,16 +43,15 @@ const Menu = () => {
         paddingTop: 20,
         paddingBottom: 20,
         paddingRight: 20,
-        position: "relative"
-      }}
-    >
+        position: "relative",
+      }}>
       {staticProjects.map((i) => (
         <MenuItem
           isSubItem={true}
           key={i.id}
           item={i}
           customLeftIcon={i.icon}
-          itemType="PROJECTS"
+          itemType='PROJECTS'
         />
       ))}
       <MenuItem
@@ -68,7 +66,7 @@ const Menu = () => {
           })),
           rightButtonType: MENU_ACTION_BUTTON_TYPES.ADD_PROJECT,
         }}
-        itemType="PROJECTS"
+        itemType='PROJECTS'
       />
       <MenuItem
         rightIconVisible={hovered}
@@ -79,7 +77,7 @@ const Menu = () => {
           items: labels,
           rightButtonType: MENU_ACTION_BUTTON_TYPES.ADD_LABEL,
         }}
-        itemType="LABELS"
+        itemType='LABELS'
       />
     </div>
   );

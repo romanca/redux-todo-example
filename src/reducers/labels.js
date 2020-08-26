@@ -15,7 +15,7 @@ export default function (state = initialState, action) {
     case LABELS_ACTIONS.REMOVE_LABEL:
       return {
         ...state,
-        labels: state.labels.filter((i) => i.id !== action),
+        labels: state.labels.filter((i) => i.id !== action.payload),
       };
     case LABELS_ACTIONS.FETCH_LABELS_FINNISH:
       return {

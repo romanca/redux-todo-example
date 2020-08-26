@@ -21,7 +21,7 @@ const HAMBURGER_ITEMS = [
   },
 ];
 
-const MenuItemRightButton = ({ type, itemId, labelId }) => {
+const MenuItemRightButton = ({ type, itemId }) => {
   const openProjectsModal = useProjectEditModal();
 
   const openLabelsModal = useLabelEditModal();

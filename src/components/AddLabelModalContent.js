@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import FormField, { FORM_FILED_TYPES } from "./FormField";
 import Space from "./Space";
 
-const AddEditModalContent = ({ onContentValuesChange, initialValues }) => {
+const AddEditLabelModalContent = ({ onContentValuesChange, initialValues }) => {
   const [values, setValues] = useState({ label: "", color: "blue" });
 
   useEffect(() => {
@@ -47,4 +47,4 @@ const AddEditModalContent = ({ onContentValuesChange, initialValues }) => {
   );
 };
 
-export default AddEditModalContent;
+export default AddEditLabelModalContent;

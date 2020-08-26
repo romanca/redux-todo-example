@@ -13,12 +13,18 @@ function createIdForItem(item) {
     id: Date.now(),
   };
 }
-
+function generateNewTodoObjectFromTodoValues(values) {
+  return {
+    ...values,
+    done: false,
+    id: Date.now(),
+  };
+}
 class ApiMethods {
   getTodos = () => getKeyFromLs(LS_KEYS.todos, []);
   createTodo = async (data) => {
     const todos = await this.getTodos();
-    const todo = createIdForItem(data);
+    const todo = generateNewTodoObjectFromTodoValues(data);
     setItemToLS(LS_KEYS.todos, [...todos, todo]);
     return Promise.resolve({ data: todo });
   };
