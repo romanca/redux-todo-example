@@ -4,7 +4,9 @@ import NewTodo from "./NewTodo";
 import { connect } from "react-redux";
 import { createTodo, removeTodo, editTodo } from "../actions/todos";
 
-const Todos = ({ todos, onTodoCreated, onTodoRemoved, onTodoEdited }) => {
+ 
+
+const Todos = ({ todos, onTodoCreated, onTodoRemoved, onTodoEdited }) => { 
   return (
     <div style={{ flex: 1, paddingTop: 10 }}>
       {todos.map((item) => (
@@ -31,8 +33,8 @@ function mapDispatchToProps(dispatch) {
     onTodoCreated: (values) => {
       dispatch(createTodo(values));
     },
-    onTodoRemoved: (id) => {
-      dispatch(removeTodo(id));
+    onTodoRemoved: (value) => {
+      dispatch(removeTodo(value));
     },
     onTodoEdited: (item) => {
       dispatch(editTodo(item));

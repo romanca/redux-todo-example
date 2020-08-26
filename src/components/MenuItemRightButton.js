@@ -1,5 +1,9 @@
 import React from "react";
-import { useProjectEditModal, useConfirmationDialog } from "../hooks";
+import {
+  useProjectEditModal,
+  useConfirmationDialog,
+  useLabelEditModal,
+} from "../hooks";
 import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
 import { MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
 import { useIndexedProjects } from "../selectors";
@@ -20,6 +24,8 @@ const HAMBURGER_ITEMS = [
 const MenuItemRightButton = ({ type, itemId }) => {
   const openProjectsModal = useProjectEditModal();
 
+  const openLabelsModal = useLabelEditModal();
+
   const indexedProjects = useIndexedProjects();
 
   const showConfirmDialog = useConfirmationDialog();
@@ -30,8 +36,10 @@ const MenuItemRightButton = ({ type, itemId }) => {
     event.stopPropagation();
     switch (type) {
       case MENU_ACTION_BUTTON_TYPES.ADD_PROJECT:
-      case MENU_ACTION_BUTTON_TYPES.ADD_LABEL:
         openProjectsModal();
+        break;
+      case MENU_ACTION_BUTTON_TYPES.ADD_LABEL:
+        openLabelsModal();
         break;
       case MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER:
         if (value.id === "EDIT") {

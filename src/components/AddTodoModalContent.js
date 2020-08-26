@@ -37,7 +37,7 @@ const AddTicketModalContent = ({
         error={errors ? errors.title : null}
         value={values.title}
         onChange={getFieldChangeHandler("title", "target.value")}
-        label="Todo name"
+        label='Todo name'
       />
       <Space x={10} />
       <FormField
