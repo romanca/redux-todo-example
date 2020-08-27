@@ -1,5 +1,3 @@
-import { PROJECTS_ACTIONS } from "./projects";
-
 export const LABELS_ACTIONS = {
   CREATE_LABEL: "CREATE_LABEL",
   FETCH_LABELS_START: "FETCH_LABELS_START",
@@ -17,7 +15,35 @@ export function createLabel(label) {
         payload: labels,
       });
     } catch (err) {
-      console.log("createLabel -> err", err);
+      // TODO handle eroro state
+    }
+  };
+}
+
+export function updateLabel(payload) {
+  return async (dispatch, _, { apiMethods }) => {
+    console.log(payload);
+    try {
+      await apiMethods.updateLabel(payload);
+      dispatch({
+        type: LABELS_ACTIONS.UPDATE_LABEL,
+        payload,
+      });
+    } catch (err) {
+      // TODO handle eroro state
+    }
+  };
+}
+
+export function removeLabel(id) {
+  return async (dispatch, _, { apiMethods }) => {
+    try {
+      await apiMethods.removeLabel(id);
+      dispatch({
+        type: LABELS_ACTIONS.REMOVE_LABEL,
+        payload: id,
+      });
+    } catch (err) {
       // TODO handle eroro state
     }
   };

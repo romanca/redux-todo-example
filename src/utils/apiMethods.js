@@ -77,6 +77,20 @@ class ApiMethods {
     setItemToLS(LS_KEYS.labels, [...allLabels, label]);
     return Promise.resolve({ labels: label });
   };
+  removeLabel = async (id) => {
+    const allLabels = await this.getLabels();
+    const newLabels = allLabels.filter((i) => i.id !== id);
+    setItemToLS(LS_KEYS.labels, newLabels);
+    return Promise.resolve();
+  };
+  updateLabel = async (label) => {
+    const labels = await this.getLabels();
+    const newLabels = labels.map((l) =>
+      l.id === label.id ? { ...l, ...label } : l
+    );
+    setItemToLS(LS_KEYS.labels, newLabels);
+    return Promise.resolve();
+  };
 }
 
 export default new ApiMethods();

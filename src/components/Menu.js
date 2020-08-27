@@ -74,7 +74,10 @@ const Menu = () => {
         onToggle={setLabelsOpened}
         item={{
           label: "Labels",
-          items: labels,
+          items: labels.map((l) => ({
+            ...l,
+            rightButtonType: MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER,
+          })),
           rightButtonType: MENU_ACTION_BUTTON_TYPES.ADD_LABEL,
         }}
         itemType='LABELS'

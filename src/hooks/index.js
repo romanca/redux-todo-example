@@ -5,7 +5,7 @@ import AddTicketModalContent from "../components/AddTodoModalContent";
 import AddEditModalContent from "../components/AddLabelModalContent";
 import { useDispatch } from "react-redux";
 import { createProject, editProject } from "../actions/projects";
-import { createLabel } from "../actions/labels";
+import { createLabel, updateLabel } from "../actions/labels";
 
 export const useProjectEditModal = () => {
   const { setModal, closeModal } = useModal();
@@ -14,7 +14,7 @@ export const useProjectEditModal = () => {
     setModal({
       opened: true,
       initialValues,
-      title: "Project creation",
+      title: initialValues ? "Edit project" : "Project creation",
       content: AddProjectModalContent,
       validate: (values) => {
         const errors = {};
@@ -52,7 +52,7 @@ export const useLabelEditModal = () => {
     setModal({
       opened: true,
       initialValues,
-      title: "Label creation",
+      title: initialValues ? "Label edit" : "Label creation",
       content: AddEditModalContent,
       validate: (values) => {
         const errors = {};
@@ -73,7 +73,7 @@ export const useLabelEditModal = () => {
             if (!initialValues) {
               dispatch(createLabel(values));
             } else {
-              // dispatch(editProject(values));
+              dispatch(updateLabel(values));
             }
             closeModal();
           },

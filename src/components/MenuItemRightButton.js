@@ -6,9 +6,10 @@ import {
 } from "../hooks";
 import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
 import { MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
-import { useIndexedProjects } from "../selectors";
+import { useIndexedProjects, useLabels } from "../selectors";
 import { useDispatch } from "react-redux";
 import { removeProject } from "../actions/projects";
+import { removeLabel } from "../actions/labels";
 
 const HAMBURGER_ITEMS = [
   {
@@ -27,6 +28,8 @@ const MenuItemRightButton = ({ type, itemId }) => {
   const openLabelsModal = useLabelEditModal();
 
   const indexedProjects = useIndexedProjects();
+
+  const labels = useLabels();
 
   const showConfirmDialog = useConfirmationDialog();
 
@@ -56,6 +59,22 @@ const MenuItemRightButton = ({ type, itemId }) => {
           });
         }
         break;
+      case MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER:
+        if (value.id === "EDIT") {
+          openLabelsModal({
+            initialValues: labels.find((l) => l.id === itemId),
+          });
+          return;
+        }
+        if (value.id === "DELETE") {
+          showConfirmDialog({
+            title: "Label Removal",
+            message: "Are you sure , you want to remove this label?",
+            onConfirm: () => {
+              dispatch(removeLabel(itemId));
+            },
+          });
+        }
       default:
         return null;
     }
