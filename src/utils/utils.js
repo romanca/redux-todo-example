@@ -1,12 +1,12 @@
-import { staticMenuItems } from "./Constants";
-import shorthash from "shorthash"
-
-export function getDefaultProjectForPicker() {
-  return staticMenuItems[0];
-}
+import shorthash from "shorthash";
 
 export function generateViewKey(filterType, itemId) {
   return `${filterType}_${itemId}`;
+}
+
+export function getViewKeyData(key) {
+  const [filterType, itemId] = key.split("_");
+  return { filterType, itemId };
 }
 
 export function createMemoizedFunction(method) {

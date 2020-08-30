@@ -3,10 +3,19 @@ import Todo from "./Todo";
 import NewTodo from "./NewTodo";
 import { connect } from "react-redux";
 import { createTodo, removeTodo, editTodo } from "../actions/todos";
+import { useTodosForCurrentView } from "../selectors";
+import TodosViewHeader from "./DataViewHeader";
 
-const Todos = ({ todos, onTodoCreated, onTodoRemoved, onTodoEdited }) => {
+const Todos = ({ onTodoCreated, onTodoRemoved, onTodoEdited }) => {
+  const todos = useTodosForCurrentView();
   return (
-    <div style={{ flex: 1, paddingTop: 10 }}>
+    <div
+      style={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+      }}>
+      <TodosViewHeader />
       {todos.map((item) => (
         <Todo
           key={item.id}
@@ -19,12 +28,6 @@ const Todos = ({ todos, onTodoCreated, onTodoRemoved, onTodoEdited }) => {
     </div>
   );
 };
-
-function mapStateToProps(state) {
-  return {
-    todos: state.todos.data.filter((i) => !i.done),
-  };
-}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -40,4 +43,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todos);
+export default connect(null, mapDispatchToProps)(Todos);

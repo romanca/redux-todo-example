@@ -15,6 +15,7 @@ const MenuItem = React.memo(
     customLeftIcon,
     rightIconVisible,
     isSubItem,
+    visible,
   }) => {
     const { listeners, hovered: firstHovered } = useHover();
     const { listeners: secondListeners, hovered: secondHovered } = useHover();
@@ -67,7 +68,8 @@ const MenuItem = React.memo(
       );
     };
 
-    const backgroundColor = hovered && isSubItem ? hoverBackground : "unset";
+    const backgroundColor =
+      hovered && isSubItem && visible ? hoverBackground : "unset";
 
     const isRightIconVisible = () => {
       if (!rightIconVisible) {
@@ -149,6 +151,7 @@ const MenuItem = React.memo(
             }}>
             {item.items.map((i) => (
               <MenuItem
+                visible={opened}
                 isSubItem={true}
                 key={i.id}
                 itemType={itemType}

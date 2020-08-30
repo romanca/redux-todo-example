@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
-import { useConfirmationDialog, useEditTodoDialog } from "../hooks";
+import { useConfirmationDialog, useEditTodoDialog, useHover } from "../hooks";
 import Checkbox from "./Checkbox";
 
 const TODO_ITEM_MENU = [
@@ -16,6 +16,7 @@ const TODO_ITEM_MENU = [
 
 const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
   const showConfirmDialog = useConfirmationDialog();
+  const { listeners, hovered } = useHover();
 
   const showEditTodoDialog = useEditTodoDialog({
     onConfirm: (value) => {
@@ -39,7 +40,7 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
           title: "Todo Removal",
           message: "Are you sure you want to remove this task?",
           onConfirm: () => {
-            onTodoRemoved(item.id);
+            onTodoRemoved(item);
           },
         });
         break;
@@ -55,13 +56,13 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
 
   return (
     <div
+      {...listeners}
       style={{
         opacity: checked ? 0 : 1,
         transition: "opacity 0.5s",
         border: "0.2px solid black",
         padding: 10,
         borderRadius: 5,
-        width: "100%",
         marginBottom: 10,
         boxShadow: "2px 2px 7px 0px rgba(0,0,0,0.49)",
         display: "flex",
@@ -75,12 +76,22 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
           cursor: "pointer",
           position: "relative",
         }}>
-        <IconButton
-          type={ICON_BUTTON_TYPES.CONTEXT_MENU}
-          onClick={handleMenuItemClick}
-          contextMenuId={contextMenuId}
-          items={TODO_ITEM_MENU}
-        />
+        {hovered && (
+          <div
+            style={{
+              width: 10,
+              height: 10,
+              position: "relative",
+              cursor: "pointer",
+            }}>
+            <IconButton
+              type={ICON_BUTTON_TYPES.CONTEXT_MENU}
+              onClick={handleMenuItemClick}
+              contextMenuId={contextMenuId}
+              items={TODO_ITEM_MENU}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

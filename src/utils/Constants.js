@@ -8,10 +8,14 @@ export const MENU_ACTION_BUTTON_TYPES = {
   LABEL_HAMBURGER: "LABEL_HAM",
 };
 
+export const staticMenuItemsIds = {
+  INBOX: 'INBOX-TODOS'
+}
+
 export const staticMenuItems = [
   {
     label: "Inbox",
-    id: "INBOX_TODOS",
+    id: staticMenuItemsIds.INBOX,
     icon: (
       <div style={{ marginRight: 10, display: "flex", alignItems: "center" }}>
         <InboxIcon />
