@@ -4,9 +4,7 @@ import NewTodo from "./NewTodo";
 import { connect } from "react-redux";
 import { createTodo, removeTodo, editTodo } from "../actions/todos";
 
- 
-
-const Todos = ({ todos, onTodoCreated, onTodoRemoved, onTodoEdited }) => { 
+const Todos = ({ todos, onTodoCreated, onTodoRemoved, onTodoEdited }) => {
   return (
     <div style={{ flex: 1, paddingTop: 10 }}>
       {todos.map((item) => (
@@ -24,7 +22,7 @@ const Todos = ({ todos, onTodoCreated, onTodoRemoved, onTodoEdited }) => {
 
 function mapStateToProps(state) {
   return {
-    todos: state.todos.data,
+    todos: state.todos.data.filter((i) => !i.done),
   };
 }
 

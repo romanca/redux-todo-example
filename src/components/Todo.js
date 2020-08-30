@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
 import { useConfirmationDialog, useEditTodoDialog } from "../hooks";
+import Checkbox from "./Checkbox";
 
 const TODO_ITEM_MENU = [
   {
@@ -18,9 +19,18 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
 
   const showEditTodoDialog = useEditTodoDialog({
     onConfirm: (value) => {
-      onTodoEdited(value)
+      onTodoEdited(value);
     },
   });
+
+  const [checked, toggleChecked] = useState(item.done);
+
+  const toggleDone = () => {
+    toggleChecked(!checked);
+    setTimeout(() => {
+      onTodoEdited({ ...item, done: !item.done });
+    }, 500);
+  };
 
   const handleMenuItemClick = ({ id }) => {
     switch (id) {
@@ -46,6 +56,8 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
   return (
     <div
       style={{
+        opacity: checked ? 0 : 1,
+        transition: "opacity 0.5s",
         border: "0.2px solid black",
         padding: 10,
         borderRadius: 5,
@@ -53,17 +65,16 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
         marginBottom: 10,
         boxShadow: "2px 2px 7px 0px rgba(0,0,0,0.49)",
         display: "flex",
-      }}
-    >
-      <div style={{ flex: 1 }}>{item.title}</div>
+      }}>
+      <Checkbox checked={checked} onChange={toggleDone} />
+      <div style={{ flex: 1, marginLeft: 5 }}>{item.title}</div>
       <div
         style={{
           width: 10,
           height: 10,
-          position: "relative",
           cursor: "pointer",
-        }}
-      >
+          position: "relative",
+        }}>
         <IconButton
           type={ICON_BUTTON_TYPES.CONTEXT_MENU}
           onClick={handleMenuItemClick}
