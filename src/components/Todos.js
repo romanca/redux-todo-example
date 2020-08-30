@@ -14,8 +14,7 @@ const Todos = ({ onTodoCreated, onTodoRemoved, onTodoEdited }) => {
         flex: 1,
         display: "flex",
         flexDirection: "column",
-      }}
-    >
+      }}>
       <TodosViewHeader />
       {todos.map((item) => (
         <Todo
