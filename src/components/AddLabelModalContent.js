@@ -10,7 +10,7 @@ const AddEditLabelModalContent = ({ onContentValuesChange, initialValues }) => {
       setValues(initialValues);
       onContentValuesChange(initialValues);
     }
-  }, [initialValues, onContentValuesChange]);
+  }, [initialValues]);
 
   const getFieldChangeHandler = (field) => (e) => {
     const newValues = {
