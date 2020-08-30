@@ -1,10 +1,11 @@
 import { uiStateFields, actions } from "../actions/uiState";
 import { generateViewKey } from "../utils/utils";
+import { staticMenuItemsIds } from "../utils/Constants";
 
 const initialState = {
   [uiStateFields.projectsOpened]: false,
   view: {
-    currentView: generateViewKey("PROJECTS", "INBOX_TODOS"),
+    currentView: generateViewKey("PROJECTS", staticMenuItemsIds.INBOX),
   },
 };
 

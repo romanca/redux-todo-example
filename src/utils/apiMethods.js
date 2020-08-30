@@ -38,6 +38,7 @@ class ApiMethods {
     const todos = await this.getTodos();
     const editedTodos = todos.map((i) => (i.id === todo.id ? todo : i));
     setItemToLS(LS_KEYS.todos, editedTodos);
+    return Promise.resolve();
   };
   removeProject = async (id) => {
     const projects = await this.getProjects();

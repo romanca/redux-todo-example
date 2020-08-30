@@ -42,11 +42,15 @@ export default function (state = initialState, action) {
     case TODO_ACTIONS.REMOVE_TODO:
       return {
         ...state,
-        data: state.data.filter((i) => i.id !== action.payload),
+        data: state.data.filter((i) => i.id !== action.payload.id),
         indexedTodos: {
           ...state.indexedTodos,
-          [action.payload]: undefined,
+          [action.payload.id]: undefined,
         },
+        projectTodoViews: removeTodoFromView(
+          state.projectTodoViews,
+          action.payload
+        ),
       };
     case TODO_ACTIONS.EDIT_TODO:
       return {
@@ -57,6 +61,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         data: action.payload,
+        indexedTodos: action.payload.reduce(
+          (result, item) => ({ ...result, [item.id]: item }),
+          {}
+        ),
+        projectTodoViews: setProjectViews(action.payload),
       };
     default:
       return state;
@@ -71,6 +80,26 @@ function updateProjectViews(originalViews, item) {
     [key]: [...oldValues, item.id],
   };
   return final;
+}
+
+function setProjectViews(todos) {
+  return todos.reduce((result, item) => {
+    const key = generateViewKey("PROJECTS", item.projectId);
+    const oldTodosForKey = get(result, key, []);
+    return {
+      ...result,
+      [key]: [...oldTodosForKey, item.id],
+    };
+  }, {});
+}
+
+function removeTodoFromView(currentValues, { projectId, id }) {
+  const key = generateViewKey("PROJECTS", projectId);
+  const oldValues = get(currentValues, key, []);
+  return {
+    ...currentValues,
+    [key]: oldValues.filter((i) => i !== id),
+  };
 }
 
 function editTodo({ data, indexedTodos, projectTodoViews }, item) {
