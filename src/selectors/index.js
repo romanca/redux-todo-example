@@ -100,3 +100,7 @@ export function useCurrentViewData() {
   const dataPool = filterType === "PROJECTS" ? projects : {};
   return get(dataPool, itemId);
 }
+
+export function useLabels() {
+  return useSelector((state) => state.labels.labels);
+}

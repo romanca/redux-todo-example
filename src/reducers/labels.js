@@ -1,5 +1,4 @@
 import { LABELS_ACTIONS } from "../actions/labels";
-import { MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
 
 const initialState = {
   labels: [],
@@ -21,6 +20,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         labels: action.payload,
+      };
+    case LABELS_ACTIONS.UPDATE_LABEL:
+      return {
+        ...state,
+        labels: state.labels.map((l) =>
+          l.id === action.payload.id ? action.payload : l
+        ),
       };
     default:
       return state;
