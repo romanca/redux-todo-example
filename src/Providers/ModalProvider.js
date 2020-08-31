@@ -44,7 +44,7 @@ const ModalProvider = ({ children }) => {
     setTimeout(() => {
       setOpened(false);
       setModalContent(null);
-    }, 500);
+    }, 100);
   };
 
   const handleCloseRequest = () => {

@@ -53,7 +53,7 @@ const Modal = ({ modalContent, onRequestClose, visible }) => {
   return (
     <div
       style={{
-        transition: "opacity 0.5s",
+        transition: "opacity 0.1s",
         opacity: visible ? 1 : 0,
         position: "absolute",
         width: "100%",
