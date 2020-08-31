@@ -11,13 +11,13 @@ export const ICON_BUTTON_TYPES = {
   CLOSE: "CLOSE",
 };
 
-const IconButton = ({ type, onClick, contextMenuId, items }) => {
+const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
   const { listeners, hovered } = useHover();
   const backgroundColor = hovered ? "lightGray" : "white";
   switch (type) {
     case ICON_BUTTON_TYPES.CLOSE:
       return (
-        <div style={{ float: "right", marginTop: -4 }}>
+        <div style={{ float: "right", marginTop: -4, opacity: isVisible ? 1 : 0 }}>
           <button
             style={{
               border: "none",
@@ -37,7 +37,7 @@ const IconButton = ({ type, onClick, contextMenuId, items }) => {
     case ICON_BUTTON_TYPES.CONTEXT_MENU:
       return (
         <ContextMenu onItemClick={onClick} id={contextMenuId} items={items}>
-          <div style={{ display: "flex" }} {...listeners}>
+          <div style={{ display: "flex", opacity: isVisible ? 1 : 0 }} {...listeners}>
             <DottedMenuIcon hovered={hovered} />
           </div>
         </ContextMenu>
@@ -51,6 +51,7 @@ const IconButton = ({ type, onClick, contextMenuId, items }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            opacity: isVisible ? 1 : 0
           }}
         >
           <PlusIcon hovered={hovered} />

@@ -22,7 +22,7 @@ const HAMBURGER_ITEMS = [
   },
 ];
 
-const MenuItemRightButton = ({ type, itemId }) => {
+const MenuItemRightButton = ({ type, itemId, isVisible = true }) => {
   const openProjectsModal = useProjectEditModal();
 
   const openLabelsModal = useLabelEditModal();
@@ -75,6 +75,7 @@ const MenuItemRightButton = ({ type, itemId }) => {
             },
           });
         }
+        break;
       default:
         return null;
     }
@@ -83,11 +84,12 @@ const MenuItemRightButton = ({ type, itemId }) => {
   switch (type) {
     case MENU_ACTION_BUTTON_TYPES.ADD_PROJECT:
     case MENU_ACTION_BUTTON_TYPES.ADD_LABEL:
-      return <IconButton type={ICON_BUTTON_TYPES.PLUS} onClick={handleClick} />;
+      return <IconButton type={ICON_BUTTON_TYPES.PLUS} onClick={handleClick} isVisible={isVisible} />;
     case MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER:
     case MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER:
       return (
         <IconButton
+          isVisible={isVisible}
           type={ICON_BUTTON_TYPES.CONTEXT_MENU}
           onClick={(value, event) => handleClick(event, value)}
           contextMenuId={`CONTEXT_MENU_${MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER}_${itemId}`}
