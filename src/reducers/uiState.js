@@ -16,9 +16,9 @@ export default function uiState(state = initialState, action) {
         ...state,
         view: {
           ...state.view,
-          currentView: action.payload
-        }
-      }
+          currentView: action.payload,
+        },
+      };
     case actions.SET_UI_STATE_FIELD:
       return {
         ...state,
@@ -26,6 +26,7 @@ export default function uiState(state = initialState, action) {
       };
     case actions.LOAD_UI_STATE:
       return {
+        ...state,
         ...action.payload,
       };
     default:

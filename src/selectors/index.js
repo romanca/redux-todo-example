@@ -89,7 +89,7 @@ export function useTodosForCurrentView() {
   const currentView = useCurrentView();
   const projectViews = useProjectViews();
   const visibleTodos = get(projectViews, currentView, []);
-  return visibleTodos.map((i) => todos[i]);
+  return visibleTodos.map((i) => todos[i]).filter((i) => !i.done);
 }
 
 export function useCurrentViewData() {
