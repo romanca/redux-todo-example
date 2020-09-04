@@ -9,7 +9,8 @@ export const TODO_ACTIONS = {
 export function createTodo(todo) {
   return async (dispatch, _, { apiMethods }) => {
     try {
-      const { data } = await apiMethods.createTodo(todo);
+      const { apiResult } = await apiMethods.createTodo(todo);
+      const { data } = await apiResult;
       dispatch({
         type: TODO_ACTIONS.CREATE_TODO,
         payload: data,
@@ -35,10 +36,11 @@ export function removeTodo(payload) {
 export function editTodo(payload) {
   return async (dispatch, _, { apiMethods }) => {
     try {
-      await apiMethods.editTodo(payload);
+      const { apiResult } = await apiMethods.editTodo(payload);
+      const { data } = await apiResult;
       dispatch({
         type: TODO_ACTIONS.EDIT_TODO,
-        payload,
+        payload: data,
       });
     } catch (err) {}
   };
@@ -50,16 +52,25 @@ export function getAllTodos() {
       type: TODO_ACTIONS.FETCH_TODOS_START,
     });
     try {
-      const payload = await apiMethods.getTodos();
+      const { cacheResult, apiResult } = await apiMethods.getTodos();
+      const { data: cachePayload } = await cacheResult;
+      dispatch({
+        type: TODO_ACTIONS.FETCH_TODOS_FINNISH,
+        payload: cachePayload,
+      });
+      const { data: payload } = await apiResult;
       dispatch({
         type: TODO_ACTIONS.FETCH_TODOS_FINNISH,
         payload,
       });
+      return payload;
     } catch (err) {
+      console.log("getAllTodos -> err", err)
       dispatch({
         type: TODO_ACTIONS.FETCH_TODOS_FINNISH,
         payload: [],
       });
+      return [];
     }
   };
 }

@@ -9,7 +9,8 @@ export const PROJECTS_ACTIONS = {
 export function createProject(project) {
   return async (dispatch, _, { apiMethods }) => {
     try {
-      const { data } = await apiMethods.createProject(project);
+      const { apiResult } = await apiMethods.createProject(project);
+      const { data } = await apiResult;
       dispatch({
         type: PROJECTS_ACTIONS.CREATE_PROJECT,
         payload: data,
@@ -23,10 +24,11 @@ export function createProject(project) {
 export function editProject(payload) {
   return async (dispatch, _, { apiMethods }) => {
     try {
-      await apiMethods.updateProject(payload);
+      const { apiResult } = await apiMethods.updateProject(payload);
+      const { data } = await apiResult;
       dispatch({
         type: PROJECTS_ACTIONS.UPDATE_PROJECT,
-        payload,
+        payload: data,
       });
     } catch (err) {
       // TODO handle error state
@@ -54,10 +56,16 @@ export function getAllProjects() {
       type: PROJECTS_ACTIONS.FETCH_PROJECTS_START,
     });
     try {
-      const payload = await apiMethods.getProjects();
+      const { cacheResult, apiResult } = await apiMethods.getProjects();
+      const { data: cache } = await cacheResult;
       dispatch({
         type: PROJECTS_ACTIONS.FETCH_PROJECTS_FINNISH,
-        payload,
+        payload: cache,
+      });
+      const { data: payload } = await apiResult;
+      dispatch({
+        type: PROJECTS_ACTIONS.FETCH_PROJECTS_FINNISH,
+        payload: payload,
       });
     } catch (err) {
       dispatch({

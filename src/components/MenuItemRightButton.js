@@ -60,6 +60,7 @@ const MenuItemRightButton = ({ type, itemId, isVisible = true }) => {
         }
         break;
       case MENU_ACTION_BUTTON_TYPES.LABEL_HAMBURGER:
+        console.log(value);
         if (value.id === "EDIT") {
           openLabelsModal({
             initialValues: labels.find((l) => l.id === itemId),

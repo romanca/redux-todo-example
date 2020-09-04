@@ -4,22 +4,36 @@ import Todos from "./components/Todos";
 import ModalProvider from "./Providers/ModalProvider";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
-import rootReducer from "./reducers";
+import rootReducer, { staticReducers } from "./reducers";
 import ReduxThunk from "redux-thunk";
-import apiMethods from "./utils/apiMethods";
+import ApiMethods, { mockResolvers } from "./utils/apiMethods";
 import { getAllProjects } from "./actions/projects";
 import { getUiState } from "./actions/uiState";
 import { getAllTodos } from "./actions/todos";
 import { getAllLabels } from "./actions/labels";
 import ContextMenuProvider from "./Providers/ContextMenuProvider";
+import httpClient from "httpClient";
 
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(ReduxThunk.withExtraArgument({ apiMethods })),
+    applyMiddleware(
+      ReduxThunk.withExtraArgument({ apiMethods: new ApiMethods() })
+    ),
+    httpClient.reduxDevEnhancer(staticReducers),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
+
+httpClient.configure({ mockResolvers, fetchDelay: 0 });
+
+httpClient.interceptors.onRequest((value) => {
+  console.log("request interceptor called with: ", value);
+});
+
+httpClient.interceptors.onResponse((...args) => {
+  console.log("response interceptoevalue", args);
+});
 
 store.dispatch(getAllLabels());
 store.dispatch(getAllProjects());
