@@ -26,6 +26,7 @@ export default function uiState(state = initialState, action) {
       };
     case actions.LOAD_UI_STATE:
       return {
+        ...state,
         ...action.payload,
       };
     default:
