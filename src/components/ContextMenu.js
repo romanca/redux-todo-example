@@ -10,11 +10,11 @@ const Item = ({ item, onClick }) => {
   const { listeners, hovered } = useHover();
   const backgroundColor = hovered ? "lightGray" : "";
   return (
-    <MenuItem onClick={() => {}}>
+    <MenuItem
+      onClick={(event) => {
+        onClick(item, event);
+      }}>
       <div
-        onClick={(event) => {
-          onClick(item, event);
-        }}
         {...listeners}
         style={{
           padding: 5,
@@ -22,8 +22,7 @@ const Item = ({ item, onClick }) => {
           backgroundColor,
           cursor: "pointer",
           minWidth: 150,
-        }}
-      >
+        }}>
         {item.label}
       </div>
     </MenuItem>
@@ -44,8 +43,7 @@ const ContextMenu = ({ children, items, onItemClick, id, menuContent }) => {
           backgroundColor: "white",
           borderBottomWidth: 0,
           zIndex: 9999,
-        }}
-      >
+        }}>
         {menuContent && menuContent}
         {items &&
           items.map((i, index) => (

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useConfirmationDialog, useHover } from "../hooks";
 import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
-import { useConfirmationDialog, useEditTodoDialog, useHover } from "../hooks";
-import Checkbox from "./Checkbox";
+import EditTodoInput from "./EditTodoInput";
+import CheckBox from "./Checkbox";
+import "pretty-checkbox";
 
 const TODO_ITEM_MENU = [
   {
@@ -16,15 +18,13 @@ const TODO_ITEM_MENU = [
 
 const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
   const showConfirmDialog = useConfirmationDialog();
+  const [editing, setEditing] = useState(true);
   const { listeners, hovered } = useHover();
-
-  const showEditTodoDialog = useEditTodoDialog({
-    onConfirm: (value) => {
-      onTodoEdited(value);
-    },
-  });
-
   const [checked, toggleChecked] = useState(item.done);
+
+  const toggleEditing = () => {
+    setEditing(!editing);
+  };
 
   const toggleDone = () => {
     toggleChecked(!checked);
@@ -45,54 +45,73 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
         });
         break;
       case "EDIT":
-        showEditTodoDialog({ initialValues: item });
+        toggleEditing();
         break;
       default:
         break;
     }
   };
 
+  const onConfirm = (todo) => {
+    onTodoEdited(todo);
+  };
+
   const contextMenuId = `TODO_CONTEXT_MENU_${item.id}`;
 
   return (
-    <div
-      {...listeners}
-      style={{
-        opacity: checked ? 0 : 1,
-        transition: "opacity 0.5s",
-        border: "0.2px solid black",
-        padding: 10,
-        borderRadius: 5,
-        marginBottom: 10,
-        boxShadow: "2px 2px 7px 0px rgba(0,0,0,0.49)",
-        display: "flex",
-      }}>
-      <Checkbox checked={checked} onChange={toggleDone} />
-      <div style={{ flex: 1, marginLeft: 5 }}>{item.title}</div>
-      <div
-        style={{
-          width: 10,
-          height: 10,
-          cursor: "pointer",
-          position: "relative",
-        }}>
-        {hovered && (
-          <div
-            style={{
-              width: 10,
-              height: 10,
-              position: "relative",
-              cursor: "pointer",
-            }}>
-            <IconButton
-              type={ICON_BUTTON_TYPES.CONTEXT_MENU}
-              onClick={handleMenuItemClick}
-              contextMenuId={contextMenuId}
-              items={TODO_ITEM_MENU}
-            />
+    <div>
+      {!editing ? (
+        <EditTodoInput
+          onRequestClose={toggleEditing}
+          initialItem={item}
+          onConfirm={onConfirm}
+        />
+      ) : (
+        <div
+          {...listeners}
+          style={{
+            opacity: checked ? 0 : 1,
+            transition: "opacity 0.5s",
+            border: "0.2px solid black",
+            padding: 10,
+            borderRadius: 5,
+            width: "100%",
+            marginBottom: 10,
+            boxShadow: "2px 2px 7px 0px rgba(0,0,0,0.49)",
+            display: "flex",
+          }}>
+          <div>
+            <CheckBox checked={checked} onChange={toggleDone} />
           </div>
-        )}
-      </div>
+          <div style={{ flex: 1, marginLeft: -5 }}>{item.title}</div>
+          <div>
+            <div
+              style={{
+                width: 10,
+                height: 10,
+                cursor: "pointer",
+                position: "relative",
+              }}>
+              {hovered && (
+                <div
+                  style={{
+                    width: 10,
+                    height: 10,
+                    position: "relative",
+                    cursor: "pointer",
+                  }}>
+                  <IconButton
+                    type={ICON_BUTTON_TYPES.CONTEXT_MENU}
+                    onClick={handleMenuItemClick}
+                    contextMenuId={contextMenuId}
+                    items={TODO_ITEM_MENU}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

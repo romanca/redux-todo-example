@@ -1,32 +1,52 @@
-import React from "react";
-import { useEditTodoDialog, useHover } from "../hooks";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import ProjectsPicker from "./ProjectsPicker";
+import { createTodo } from "../actions/todos";
+import EditTodoInput from "./EditTodoInput";
 
-const NewTodo = ({ onTodoCreated }) => {
-  const { listeners, hovered } = useHover();
+const NewTodo = () => {
+  const [opened, setOpened] = useState(false);
 
-  const handleTodoCreation = (values) => {
-    onTodoCreated(values);
+  const dispatch = useDispatch();
+
+  const onConfirm = (todo) => {
+    dispatch(createTodo(todo));
   };
 
-  const handleClick = useEditTodoDialog({ onConfirm: handleTodoCreation });
-
-  const backgroundColor = hovered ? "lightGray" : "";
+  const onClose = () => {
+    setOpened(false);
+  };
+  const onOpen = () => {
+    setOpened(true);
+  };
 
   return (
-    <div
-      onClick={handleClick}
-      {...listeners}
-      style={{
-        cursor: "pointer",
-        backgroundColor,
-        padding: "5px 15px",
-        borderRadius: 20,
-      }}
-    >
-      <span style={{ fontWeight: "bold", fontSize: 20, marginRight: 10 }}>
-        +
-      </span>
-      <span>Add ticket</span>
+    <div>
+      {opened ? (
+        <EditTodoInput onRequestClose={onClose} onConfirm={onConfirm} />
+      ) : (
+        <div
+          style={{
+            cursor: "pointer",
+            padding: "5px 15px",
+            borderRadius: 20,
+            display: "flex",
+            marginLeft: -5,
+          }}>
+          <span
+            style={{
+              fontSize: 30,
+              marginRight: 7,
+              color: "red",
+              fontWeight: 100,
+            }}>
+            +
+          </span>
+          <span onClick={onOpen} style={{ marginTop: 12 }}>
+            Add Task
+          </span>
+        </div>
+      )}
     </div>
   );
 };

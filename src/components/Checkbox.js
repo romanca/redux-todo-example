@@ -1,8 +1,14 @@
 import React from "react";
-import CheckboxRaw from "rc-checkbox";
+import { Checkbox } from "pretty-checkbox-react";
 
-const Checkbox = ({ checked, onChange }) => {
-  return <CheckboxRaw checked={checked} onChange={onChange} />;
+const CheckBox = ({ checked, onChange }) => {
+  return (
+    <Checkbox
+      checked={checked}
+      onChange={onChange}
+      className='pretty p-icon p-round p-pulse'
+    />
+  );
 };
 
-export default Checkbox;
+export default CheckBox;
