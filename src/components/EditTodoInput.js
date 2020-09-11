@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import ProjectsPicker from "./ProjectsPicker";
+import PriorityPicker from "./PriorityPicker";
 
 const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
-  const [todo, setTodo] = useState(initialItem || { title: "", projectId: "" });
+  const [todo, setTodo] = useState(
+    initialItem || { title: "", projectId: "", priorityId: "" }
+  );
+
+  const [priority, setPriority] = useState(
+    initialItem ? initialItem.priority : null
+  );
 
   const handleChangeTitle = (e) => {
     const title = e.target.value;
@@ -10,7 +17,11 @@ const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
   };
 
   const handleSubmit = () => {
-    onConfirm(todo);
+    onConfirm({
+      ...todo,
+      priorityId: priority.id,
+    });
+    onRequestClose();
   };
 
   const handleProjectPickerChange = ({ id }) => {
@@ -45,11 +56,16 @@ const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
               "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen",
           }}
         />
-        <div style={{ marginTop: 10 }}>
-          <ProjectsPicker
-            value={todo.projectId}
-            onChange={handleProjectPickerChange}
-          />
+        <div style={{ display: "flex" }}>
+          <div style={{ marginTop: 10 }}>
+            <ProjectsPicker
+              value={todo.projectId}
+              onChange={handleProjectPickerChange}
+            />
+          </div>
+          <div style={{ marginTop: 10, marginLeft: 5 }}>
+            <PriorityPicker onChange={setPriority} value={priority} />
+          </div>
         </div>
       </div>
       <div>

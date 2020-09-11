@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import ProjectsPicker from "./ProjectsPicker";
 import { createTodo } from "../actions/todos";
 import EditTodoInput from "./EditTodoInput";
 
@@ -11,6 +10,7 @@ const NewTodo = () => {
 
   const onConfirm = (todo) => {
     dispatch(createTodo(todo));
+    onClose();
   };
 
   const onClose = () => {

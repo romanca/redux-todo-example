@@ -7,6 +7,7 @@ import {
 } from "../utils/utils";
 import { get } from "lodash";
 import { staticMenuItems, staticMenuItemsIds } from "../utils/Constants";
+import { priorities } from "../components/PriorityPicker";
 
 export const useTodoSelectorById = (id) =>
   useSelector((state) => state.todos.data.find((i) => i.id === id));
@@ -89,7 +90,16 @@ export function useTodosForCurrentView() {
   const currentView = useCurrentView();
   const projectViews = useProjectViews();
   const visibleTodos = get(projectViews, currentView, []);
-  return visibleTodos.map((i) => todos[i]).filter((i) => !i.done);
+
+  return visibleTodos
+    .map((i) => todos[i])
+    .filter((i) => !i.done)
+    .map((i) => {
+      return {
+        ...i,
+        priority: priorities.find((priority) => priority.id === i.priorityId),
+      };
+    });
 }
 
 export function useCurrentViewData() {

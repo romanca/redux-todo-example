@@ -81,7 +81,11 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
             display: "flex",
           }}>
           <div>
-            <CheckBox checked={checked} onChange={toggleDone} />
+            <CheckBox
+              color={item.priority.color}
+              checked={checked}
+              onChange={toggleDone}
+            />
           </div>
           <div style={{ flex: 1, marginLeft: -5 }}>{item.title}</div>
           <div>
