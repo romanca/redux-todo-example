@@ -79,7 +79,8 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
             marginBottom: 10,
             boxShadow: "2px 2px 7px 0px rgba(0,0,0,0.49)",
             display: "flex",
-          }}>
+          }}
+        >
           <div>
             <CheckBox
               color={item.priority.color}
@@ -95,23 +96,24 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
                 height: 10,
                 cursor: "pointer",
                 position: "relative",
-              }}>
-              {hovered && (
-                <div
-                  style={{
-                    width: 10,
-                    height: 10,
-                    position: "relative",
-                    cursor: "pointer",
-                  }}>
-                  <IconButton
-                    type={ICON_BUTTON_TYPES.CONTEXT_MENU}
-                    onClick={handleMenuItemClick}
-                    contextMenuId={contextMenuId}
-                    items={TODO_ITEM_MENU}
-                  />
-                </div>
-              )}
+              }}
+            >
+              <div
+                style={{
+                  width: 10,
+                  height: 10,
+                  position: "relative",
+                  cursor: "pointer",
+                }}
+              >
+                <IconButton
+                  type={ICON_BUTTON_TYPES.CONTEXT_MENU}
+                  onClick={handleMenuItemClick}
+                  contextMenuId={contextMenuId}
+                  items={TODO_ITEM_MENU}
+                  isVisible={hovered}
+                />
+              </div>
             </div>
           </div>
         </div>
