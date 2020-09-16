@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import ProjectsPicker from "./ProjectsPicker";
 import PriorityPicker from "./PriorityPicker";
+import DatePicker from "./DatePicker";
+import { get } from "lodash";
+import Space from "./Space";
 
 const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
   const [todo, setTodo] = useState(
-    initialItem || { title: "", projectId: "", priorityId: "" }
+    initialItem || {
+      title: "",
+      projectId: "",
+    }
   );
+  const [priority, setPriority] = useState(get(initialItem, "priority", null));
 
-  const [priority, setPriority] = useState(
-    initialItem ? initialItem.priority : null
-  );
+  const [date, setDate] = useState(get(initialItem, "date"));
 
   const handleChangeTitle = (e) => {
     const title = e.target.value;
@@ -19,7 +24,8 @@ const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
   const handleSubmit = () => {
     onConfirm({
       ...todo,
-      priorityId: priority.id,
+      priorityId: priority ? priority.id : null,
+      date,
     });
     onRequestClose();
   };
@@ -33,11 +39,9 @@ const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
       <div
         style={{
           border: "0.2px solid black",
-          height: 61,
           width: "100%",
           padding: 10,
           borderRadius: 5,
-          marginBottom: 10,
           boxShadow: "2px 2px 7px 0px rgba(0,0,0,0.49)",
         }}>
         <input
@@ -56,21 +60,25 @@ const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
               "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen",
           }}
         />
-        <div style={{ display: "flex" }}>
-          <div style={{ marginTop: 10 }}>
-            <ProjectsPicker
-              value={todo.projectId}
-              onChange={handleProjectPickerChange}
-            />
-          </div>
-          <div style={{ marginTop: 10, marginLeft: 5 }}>
-            <PriorityPicker onChange={setPriority} value={priority} />
-          </div>
+        <div style={{ display: "flex", marginTop: 10 }}>
+          <ProjectsPicker
+            value={todo.projectId}
+            onChange={handleProjectPickerChange}
+          />
+          <Space x={5} />
+          <PriorityPicker onChange={setPriority} value={priority} />
+          <Space x={5} />
+          <DatePicker
+            onChange={setDate}
+            selected={date}
+            placeholder={"Select date"}
+          />
         </div>
       </div>
-      <div>
+      <div style={{ marginTop: 10 }}>
         <button
           onClick={handleSubmit}
+          disabled={!todo.title}
           style={{
             width: 80,
             height: 35,

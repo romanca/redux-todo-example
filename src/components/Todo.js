@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useConfirmationDialog, useHover } from "../hooks";
-import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
 import EditTodoInput from "./EditTodoInput";
 import CheckBox from "./Checkbox";
 import "pretty-checkbox";
+import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
+import { get } from "lodash";
+import { dateTodoFormater } from "../utils/date-formatters";
 
 const TODO_ITEM_MENU = [
   {
@@ -75,20 +77,34 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
             border: "0.2px solid black",
             padding: 10,
             borderRadius: 5,
-            width: "100%",
+            widtidth: "100%",
             marginBottom: 10,
             boxShadow: "2px 2px 7px 0px rgba(0,0,0,0.49)",
             display: "flex",
-          }}
-        >
+          }}>
           <div>
             <CheckBox
-              color={item.priority.color}
+              color={get(item, "priority.color", "grey")}
               checked={checked}
               onChange={toggleDone}
             />
           </div>
-          <div style={{ flex: 1, marginLeft: -5 }}>{item.title}</div>
+          <div style={{ width: "100%" }}>
+            <div style={{ flex: 1, marginLeft: -5, fontWeight: "bold" }}>
+              {item.title}
+            </div>
+            {item.date && (
+              <div
+                style={{
+                  flex: 1,
+                  marginLeft: -5,
+                  marginTop: 5,
+                  fontSize: 13,
+                }}>
+                {dateTodoFormater(item.date)}
+              </div>
+            )}
+          </div>
           <div>
             <div
               style={{
@@ -96,16 +112,14 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
                 height: 10,
                 cursor: "pointer",
                 position: "relative",
-              }}
-            >
+              }}>
               <div
                 style={{
                   width: 10,
                   height: 10,
                   position: "relative",
                   cursor: "pointer",
-                }}
-              >
+                }}>
                 <IconButton
                   type={ICON_BUTTON_TYPES.CONTEXT_MENU}
                   onClick={handleMenuItemClick}

@@ -12,7 +12,7 @@ const CheckBox = ({ checked, onChange, color }) => {
       }}
       checked={checked}
       onChange={onChange}
-      className='pretty p-icon p-round p-pulse'
+      className='p-round'
     />
   );
 };

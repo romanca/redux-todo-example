@@ -37,7 +37,7 @@ const AddEditLabelModalContent = ({ onContentValuesChange, initialValues }) => {
         onChange={getFieldChangeHandler("label")}
         label='Label name'
       />
-      <Space x={10} />
+      <Space y={10} />
       <FormField
         onChange={handleColorChange}
         type={FORM_FILED_TYPES.COLOR_PICKER}

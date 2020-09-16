@@ -3,7 +3,6 @@ import { useHover } from "../hooks";
 import ContextMenu from "./ContextMenu";
 import DottedMenuIcon from "./Icons/DottedMenuIcon";
 import PlusIcon from "./Icons/PlusIcon";
-import { useTheme } from "../Theme";
 
 export const ICON_BUTTON_TYPES = {
   PLUS: "PLUS",
@@ -12,12 +11,14 @@ export const ICON_BUTTON_TYPES = {
 };
 
 const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
-  const { listeners, hovered } = useHover();
+  const { listeners, hover } = useHover();
+  const hovered = true;
   const backgroundColor = hovered ? "lightGray" : "white";
   switch (type) {
     case ICON_BUTTON_TYPES.CLOSE:
       return (
-        <div style={{ float: "right", marginTop: -4, opacity: isVisible ? 1 : 0 }}>
+        <div
+          style={{ float: "right", marginTop: -4, opacity: isVisible ? 1 : 0 }}>
           <button
             style={{
               border: "none",
@@ -28,8 +29,7 @@ const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
               borderRadius: 4,
             }}
             {...listeners}
-            onClick={onClick}
-          >
+            onClick={onClick}>
             x
           </button>
         </div>
@@ -37,7 +37,9 @@ const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
     case ICON_BUTTON_TYPES.CONTEXT_MENU:
       return (
         <ContextMenu onItemClick={onClick} id={contextMenuId} items={items}>
-          <div style={{ display: "flex", opacity: isVisible ? 1 : 0 }} {...listeners}>
+          <div
+            style={{ display: "flex", opacity: isVisible ? 1 : 0 }}
+            {...listeners}>
             <DottedMenuIcon hovered={hovered} />
           </div>
         </ContextMenu>
@@ -51,9 +53,8 @@ const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            opacity: isVisible ? 1 : 0
-          }}
-        >
+            opacity: isVisible ? 1 : 0,
+          }}>
           <PlusIcon hovered={hovered} />
         </div>
       );
