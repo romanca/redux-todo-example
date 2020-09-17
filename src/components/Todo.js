@@ -5,7 +5,7 @@ import CheckBox from "./Checkbox";
 import "pretty-checkbox";
 import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
 import { get } from "lodash";
-import { dateTodoFormater } from "../utils/date-formatters";
+import { formatDateToTodoDate } from "../utils/date-formatters";
 
 const TODO_ITEM_MENU = [
   {
@@ -101,7 +101,7 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
                   marginTop: 5,
                   fontSize: 13,
                 }}>
-                {dateTodoFormater(item.date)}
+                {formatDateToTodoDate(item.date)}
               </div>
             )}
           </div>

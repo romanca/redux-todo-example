@@ -1,8 +1,8 @@
 import { format } from "date-fns";
 
-export function dateTodoFormater(date) {
+export function formatDateToTodoDate(date) {
   if (!date) {
-    console.warn("dateTodoFormater is not expecting null value");
+    console.warn("formatDateToTodoDate is not expecting null value");
     return "";
   }
   return format(new Date(date), "dd.MMMM");

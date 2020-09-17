@@ -2,13 +2,17 @@ import React from "react";
 import DatePickerRaw from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { PickerButton } from "../StyledComponents";
-import { dateTodoFormater } from "../utils/date-formatters";
+import { formatDateToTodoDate } from "../utils/date-formatters";
 
 class DatePickerInput extends React.Component {
   render() {
     const { onClick, value, placeholderText } = this.props;
-    const finalValue = value ? dateTodoFormater(value) : placeholderText;
-    return <PickerButton onClick={onClick}>{finalValue}</PickerButton>;
+    const finalValue = value ? formatDateToTodoDate(value) : placeholderText;
+    return (
+      <div onClick={onClick} >
+        <PickerButton>{finalValue}</PickerButton>
+      </div>
+    );
   }
 }
 
