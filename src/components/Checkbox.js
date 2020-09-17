@@ -1,8 +1,20 @@
 import React from "react";
-import CheckboxRaw from "rc-checkbox";
+import { Checkbox } from "pretty-checkbox-react";
+import "pretty-checkbox";
 
-const Checkbox = ({ checked, onChange }) => {
-  return <CheckboxRaw checked={checked} onChange={onChange} />;
+const CheckBox = ({ checked, onChange, color }) => {
+  return (
+    <Checkbox
+      style={{
+        border: "3px solid ",
+        borderRadius: "50%",
+        color,
+      }}
+      checked={checked}
+      onChange={onChange}
+      className='p-round'
+    />
+  );
 };
 
-export default Checkbox;
+export default CheckBox;

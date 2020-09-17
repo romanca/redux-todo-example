@@ -35,16 +35,14 @@ function App() {
             style={{
               padding: 50,
               paddingTop: 100,
-            }}
-          >
+            }}>
             <div
               style={{
                 display: "flex",
                 flexDirection: "row",
                 flex: 1,
                 justifyContent: "center",
-              }}
-            >
+              }}>
               <div
                 style={{
                   maxWidth: "70%",
@@ -52,8 +50,7 @@ function App() {
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "center",
-                }}
-              >
+                }}>
                 <Menu />
                 <Todos />
               </div>

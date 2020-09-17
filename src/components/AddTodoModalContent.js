@@ -39,7 +39,7 @@ const AddTicketModalContent = ({
         onChange={getFieldChangeHandler("title", "target.value")}
         label='Todo name'
       />
-      <Space x={10} />
+      <Space y={10} />
       <FormField
         type={FORM_FILED_TYPES.PROJECTS_PICKER}
         onChange={getFieldChangeHandler("projectId", "id")}

@@ -8,6 +8,7 @@ import TodosViewHeader from "./DataViewHeader";
 
 const Todos = ({ onTodoCreated, onTodoRemoved, onTodoEdited }) => {
   const todos = useTodosForCurrentView();
+
   return (
     <div
       style={{

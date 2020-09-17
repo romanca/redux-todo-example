@@ -35,13 +35,13 @@ const AddProjectModalContent = ({ onContentValuesChange, initialValues }) => {
       <FormField
         value={values.label}
         onChange={getFieldChangeHandler("label")}
-        label="Project name"
+        label='Project name'
       />
-      <Space x={10} />
+      <Space y={10} />
       <FormField
         onChange={handleColorChange}
         type={FORM_FILED_TYPES.COLOR_PICKER}
-        label="Project color"
+        label='Project color'
       />
     </div>
   );

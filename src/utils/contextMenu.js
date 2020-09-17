@@ -18,6 +18,7 @@ const menuItems = {
   },
 };
 
+
 const contextMenu = {
   [contextMenuKeys.TODO_VIEW]: [menuItems.REMOVE, menuItems.EDIT],
 };

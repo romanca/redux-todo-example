@@ -63,8 +63,7 @@ const Modal = ({ modalContent, onRequestClose, visible }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-      }}
-    >
+      }}>
       <div
         style={{
           width: small ? 200 : "40%",
@@ -77,15 +76,13 @@ const Modal = ({ modalContent, onRequestClose, visible }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-        }}
-      >
+        }}>
         <h3
           style={{
             width: "100%",
             borderBottom: "1px solid black",
             paddingBottom: 5,
-          }}
-        >
+          }}>
           {title}
         </h3>
         <div style={{ flex: 1, paddingBottom: 20 }}>
@@ -103,8 +100,7 @@ const Modal = ({ modalContent, onRequestClose, visible }) => {
             paddingTop: 5,
             display: "flex",
             justifyContent: "flex-end",
-          }}
-        >
+          }}>
           {actions.map((i, index) => (
             <div key={index} style={{ marginRight: 5 }}>
               <Button

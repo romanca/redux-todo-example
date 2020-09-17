@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import ContextMenu from "./ContextMenu";
 import { useSelector } from "react-redux";
 import { staticMenuItems } from "../utils/Constants";
-import { useDefaultProjectForTodoCreation } from "../selectors";
+import { useDefaultProjectForTodoCreation, useProjects } from "../selectors";
+import { PickerButton } from "../StyledComponents";
 
 function useProjectById(id) {
   const project = useSelector((state) =>
@@ -16,14 +17,14 @@ function createProjectPickerActionItems() {
     {
       label: "Add new project",
       actionType: "NEW_PROJECT",
-      if: 'NEW_PROJECT'
+      if: "NEW_PROJECT",
     },
   ];
 }
 
-const ProjectsPicker = ({ onChange, value, projects }) => {
-
+const ProjectsPicker = ({ onChange, value }) => {
   const defaultProject = useDefaultProjectForTodoCreation();
+  const projects = useProjects();
 
   const handleClick = (item) => {
     if (item.actionType) {
@@ -41,7 +42,6 @@ const ProjectsPicker = ({ onChange, value, projects }) => {
 
   const displayedProject = foundProject || defaultProject;
 
-
   return (
     <ContextMenu
       items={[
@@ -50,19 +50,8 @@ const ProjectsPicker = ({ onChange, value, projects }) => {
         ...createProjectPickerActionItems(),
       ]}
       onItemClick={handleClick}
-      id="PROJECTS_PICKER"
-    >
-      <div
-        style={{
-          display: "flex",
-          padding: 5,
-          alignItems: "baseline",
-          border: "1px solid black",
-          width: "fit-content",
-          borderRadius: 5,
-          cursor: "pointer",
-        }}
-      >
+      id='PROJECTS_PICKER'>
+      <PickerButton>
         {displayedProject && (
           <>
             <div
@@ -77,7 +66,7 @@ const ProjectsPicker = ({ onChange, value, projects }) => {
             {displayedProject.label}
           </>
         )}
-      </div>
+      </PickerButton>
     </ContextMenu>
   );
 };
