@@ -4,8 +4,10 @@ import AddProjectModalContent from "../components/AddProjectModalContent";
 import AddTicketModalContent from "../components/AddTodoModalContent";
 import AddEditModalContent from "../components/AddLabelModalContent";
 import { useDispatch } from "react-redux";
-import { createProject, editProject } from "../actions/projects";
-import { createLabel, updateLabel } from "../actions/labels";
+import { createProject, editProject, removeProject } from "../actions/projects";
+import { createLabel, updateLabel, removeLabel } from "../actions/labels";
+import { useIndexedProjects, useLabels } from "../selectors";
+import { MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
 
 export const useProjectEditModal = () => {
   const { setModal, closeModal } = useModal();
@@ -152,3 +154,75 @@ export const useHover = () => {
     hovered,
   };
 };
+
+function useProjectContextMenu(item) {
+  const openProjectsModal = useProjectEditModal();
+  const indexedProjects = useIndexedProjects();
+  const showConfirmDialog = useConfirmationDialog();
+  const dispatch = useDispatch();
+  
+
+  const items = [
+    {
+      label: "edit",
+      method: () => {
+        openProjectsModal({ initialValues: indexedProjects[item.id] });
+      },
+    },
+    {
+      label: item.isFavorite ? 'remove' : 'add',
+      method: () => {
+        showConfirmDialog({
+          title: "Project Removal",
+          message: "Are you sure you want to remove this task?",
+          onConfirm: () => {
+            dispatch(removeProject(item.id));
+          },
+        });
+      },
+    },
+  ];
+
+  return items;
+}
+
+function useLabelContextMenu(item) {
+  const openLabelsModal = useLabelEditModal();
+  const labels = useLabels();
+  const showConfirmDialog = useConfirmationDialog();
+  const dispatch = useDispatch();
+
+
+
+  const items = [
+    {
+      label: "edit",
+      method: () => {
+        openLabelsModal({
+          initialValues: labels.find((l) => l.id === item.id),
+        });
+      },
+    },
+    {
+      label: "delete",
+      method: () => {
+        showConfirmDialog({
+          title: "Label Removal",
+          message: "Are you sure , you want to remove this label?",
+          onConfirm: () => {
+            dispatch(removeLabel(item.id));
+          },
+        });
+      },
+    },
+  ];
+  return items;
+}
+
+export function useRightButtonContextMenu(item, actionButtonType) {
+  const labelsItems = useLabelContextMenu(item);
+  const projectItems = useProjectContextMenu(item);
+  return actionButtonType === MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER
+    ? projectItems
+    : labelsItems;
+}

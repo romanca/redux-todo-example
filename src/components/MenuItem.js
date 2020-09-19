@@ -140,7 +140,7 @@ const MenuItem = React.memo(
             <div style={{ flex: 1 }} />
             <MenuItemRightButton
               type={item.rightButtonType}
-              itemId={item.id}
+              item={item}
               isVisible={isRightIconVisible()}
             />
           </div>

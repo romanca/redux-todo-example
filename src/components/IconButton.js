@@ -14,6 +14,20 @@ const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
   const { listeners, hover } = useHover();
   const hovered = true;
   const backgroundColor = hovered ? "lightGray" : "white";
+
+  const handleContextMenuItemClick = (...params) => {
+
+    const [item] = params;
+
+    if (item && item.method) {
+      item.method();
+    }
+
+    if (onClick) {
+      onClick(...params);
+    };
+  }
+
   switch (type) {
     case ICON_BUTTON_TYPES.CLOSE:
       return (
@@ -36,7 +50,7 @@ const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
       );
     case ICON_BUTTON_TYPES.CONTEXT_MENU:
       return (
-        <ContextMenu onItemClick={onClick} id={contextMenuId} items={items}>
+        <ContextMenu onItemClick={handleContextMenuItemClick} id={contextMenuId} items={items}>
           <div
             style={{ display: "flex", opacity: isVisible ? 1 : 0 }}
             {...listeners}>
