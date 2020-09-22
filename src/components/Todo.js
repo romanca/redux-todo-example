@@ -6,6 +6,7 @@ import "pretty-checkbox";
 import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
 import { get } from "lodash";
 import { formatDateToTodoDate } from "../utils/date-formatters";
+import { Pane } from "evergreen-ui";
 
 const TODO_ITEM_MENU = [
   {
@@ -69,8 +70,9 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
           onConfirm={onConfirm}
         />
       ) : (
-        <div
+        <Pane
           {...listeners}
+          elevation={4}
           style={{
             opacity: checked ? 0 : 1,
             transition: "opacity 0.5s",
@@ -79,7 +81,6 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
             borderRadius: 5,
             widtidth: "100%",
             marginBottom: 10,
-            boxShadow: "2px 2px 7px 0px rgba(0,0,0,0.49)",
             display: "flex",
           }}>
           <div>
@@ -130,7 +131,7 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
               </div>
             </div>
           </div>
-        </div>
+        </Pane>
       )}
     </div>
   );
