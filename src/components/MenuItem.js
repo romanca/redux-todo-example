@@ -71,7 +71,6 @@ const MenuItem = React.memo(
     const backgroundColor =
       hovered && isSubItem && visible ? hoverBackground : "unset";
 
-<<<<<<< Updated upstream
     const isRightIconVisible = () => {
       if (!rightIconVisible) {
         return false;
@@ -82,8 +81,6 @@ const MenuItem = React.memo(
       return true;
     };
 
-=======
->>>>>>> Stashed changes
     return (
       <div
         onClick={getItemClickHandler(item)}
@@ -91,8 +88,7 @@ const MenuItem = React.memo(
           marginLeft: 20,
           borderBottom,
           cursor: "pointer",
-        }}
-      >
+        }}>
         <div
           {...listeners}
           style={{
@@ -109,23 +105,20 @@ const MenuItem = React.memo(
             padding: "10px 0",
             maxHeight: menuItemHeight,
             borderBottom: opened ? borderBottom : "",
-          }}
-        >
+          }}>
           <div
             style={{
               display: "flex",
               alignItems: "center",
               position: "relative",
-            }}
-          >
+            }}>
             {renderLeftIcon()}
             <div
               style={{
                 marginLeft: isSubItem ? 5 : 15,
                 display: "flex",
                 fontWeight: !isSubItem ? "bold" : "normal",
-              }}
-            >
+              }}>
               {item.label}
               {item.activeTodos > 0 && (
                 <div
@@ -134,8 +127,7 @@ const MenuItem = React.memo(
                     fontSize: 13,
                     color: "grey",
                     alignSelf: "flex-end",
-                  }}
-                >
+                  }}>
                   {item.activeTodos}
                 </div>
               )}
@@ -155,8 +147,7 @@ const MenuItem = React.memo(
               overflow: "hidden",
               transition: "height 0.3s",
               paddingBottom: 2,
-            }}
-          >
+            }}>
             {item.items.map((i) => (
               <MenuItem
                 visible={opened}

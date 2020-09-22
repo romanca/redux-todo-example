@@ -24,6 +24,7 @@ const Menu = () => {
   const labels = useLabels();
   const projects = useProjects();
   const staticProjects = useStaticProjects();
+  const favoriteProjects = useProjects();
 
   const { hovered, listeners } = useHover();
 
@@ -52,8 +53,6 @@ const Menu = () => {
           item={i}
           customLeftIcon={i.icon}
           itemType='PROJECTS'
-<<<<<<< Updated upstream
-=======
           rightIconVisible={hovered}
         />
       ))}
@@ -65,7 +64,6 @@ const Menu = () => {
           itemType='PROJECTS'
           rightIconVisible={true}
           rightButtonType={MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER}
->>>>>>> Stashed changes
         />
       ))}
       <MenuItem
