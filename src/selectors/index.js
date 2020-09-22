@@ -76,6 +76,7 @@ export function useDefaultProjectForTodoCreation() {
   const currentView = useCurrentView();
   const { filterType, itemId } = getViewKeyData(currentView);
   const projects = useIndexedProjects();
+
   if (
     filterType === "LABELS" ||
     currentView === generateViewKey("PROJECTS", staticMenuItemsIds.INBOX)
@@ -83,6 +84,11 @@ export function useDefaultProjectForTodoCreation() {
     return staticMenuItems.find((i) => i.id === staticMenuItemsIds.INBOX);
   }
   return projects[itemId];
+}
+
+export function useFavoriteProjects() {
+  const projects = useSelector((state) => getProjects(state));
+  return projects.filter((i) => i.isFavorite);
 }
 
 export function useTodosForCurrentView() {

@@ -3,7 +3,7 @@ import FormField, { FORM_FILED_TYPES } from "./FormField";
 import Space from "./Space";
 
 const AddEditLabelModalContent = ({ onContentValuesChange, initialValues }) => {
-  const [values, setValues] = useState({ label: "", color: "blue" });
+  const [values, setValues] = useState({ label: "", color: "black" });
 
   useEffect(() => {
     if (initialValues) {
