@@ -13,6 +13,7 @@ function createIdForItem(item) {
     id: Date.now(),
   };
 }
+
 function generateNewTodoObjectFromTodoValues(values) {
   return {
     ...values,
@@ -20,6 +21,7 @@ function generateNewTodoObjectFromTodoValues(values) {
     id: Date.now(),
   };
 }
+
 class ApiMethods {
   getTodos = () => getKeyFromLs(LS_KEYS.todos, []);
   createTodo = async (data) => {
@@ -86,6 +88,7 @@ class ApiMethods {
   };
   updateLabel = async (label) => {
     const labels = await this.getLabels();
+    console.log(labels);
     const newLabels = labels.map((l) =>
       l.id === label.id ? { ...l, ...label } : l
     );

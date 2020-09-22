@@ -160,7 +160,6 @@ function useProjectContextMenu(item) {
   const indexedProjects = useIndexedProjects();
   const showConfirmDialog = useConfirmationDialog();
   const dispatch = useDispatch();
-  
 
   const items = [
     {
@@ -170,7 +169,14 @@ function useProjectContextMenu(item) {
       },
     },
     {
-      label: item.isFavorite ? 'remove' : 'add',
+      label: item.isFavorite ? "Remove from favorites " : "Add to favorites",
+      method: () => {
+        dispatch(editProject({ ...item, isFavorite: !item.isFavorite }));
+      },
+    },
+
+    {
+      label: "remove",
       method: () => {
         showConfirmDialog({
           title: "Project Removal",
@@ -191,8 +197,6 @@ function useLabelContextMenu(item) {
   const labels = useLabels();
   const showConfirmDialog = useConfirmationDialog();
   const dispatch = useDispatch();
-
-
 
   const items = [
     {

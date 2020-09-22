@@ -9,8 +9,8 @@ export const MENU_ACTION_BUTTON_TYPES = {
 };
 
 export const staticMenuItemsIds = {
-  INBOX: 'INBOX-TODOS'
-}
+  INBOX: "INBOX-TODOS",
+};
 
 export const staticMenuItems = [
   {

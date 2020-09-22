@@ -14,7 +14,7 @@ const MenuItemRightButton = ({ type, item = {}, isVisible = true }) => {
 
   const contextMenuItems = useRightButtonContextMenu(item, type);
 
-  const handleClick = (event, value) => {
+  const handleClick = (event) => {
     event.stopPropagation();
     switch (type) {
       case MENU_ACTION_BUTTON_TYPES.ADD_PROJECT:
