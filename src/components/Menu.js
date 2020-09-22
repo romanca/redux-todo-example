@@ -52,6 +52,20 @@ const Menu = () => {
           item={i}
           customLeftIcon={i.icon}
           itemType='PROJECTS'
+<<<<<<< Updated upstream
+=======
+          rightIconVisible={hovered}
+        />
+      ))}
+      {favoriteProjects.map((i) => (
+        <MenuItem
+          isSubItem={true}
+          key={i.id}
+          item={i}
+          itemType='PROJECTS'
+          rightIconVisible={true}
+          rightButtonType={MENU_ACTION_BUTTON_TYPES.PROJECTS_HAMBURGER}
+>>>>>>> Stashed changes
         />
       ))}
       <MenuItem

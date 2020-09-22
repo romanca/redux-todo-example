@@ -71,6 +71,7 @@ const MenuItem = React.memo(
     const backgroundColor =
       hovered && isSubItem && visible ? hoverBackground : "unset";
 
+<<<<<<< Updated upstream
     const isRightIconVisible = () => {
       if (!rightIconVisible) {
         return false;
@@ -81,6 +82,8 @@ const MenuItem = React.memo(
       return true;
     };
 
+=======
+>>>>>>> Stashed changes
     return (
       <div
         onClick={getItemClickHandler(item)}
