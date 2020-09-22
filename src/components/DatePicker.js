@@ -9,7 +9,7 @@ class DatePickerInput extends React.Component {
     const { onClick, value, placeholderText } = this.props;
     const finalValue = value ? formatDateToTodoDate(value) : placeholderText;
     return (
-      <div onClick={onClick} >
+      <div onClick={onClick}>
         <PickerButton>{finalValue}</PickerButton>
       </div>
     );

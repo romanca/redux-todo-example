@@ -1019,7 +1019,19 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+<<<<<<< Updated upstream
 "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5":
+=======
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5":
+=======
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5":
+>>>>>>> Stashed changes
+=======
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5":
+>>>>>>> master
+>>>>>>> Stashed changes
   version "7.11.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.11.2.tgz#f549c13c754cc40b87644b9fa9f09a6a95fe0736"
   integrity sha512-TeWkU52so0mPtDcaCTxNBI/IHiz0pZgr8VEFqXFtZWpYD08ZB6FaSwVAS8MKRQAP3bYKiVjwysOJgMFY28o6Tw==
@@ -1685,6 +1697,14 @@
   dependencies:
     "@types/react" "*"
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> master
+>>>>>>> Stashed changes
 "@types/react-transition-group@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.0.tgz#882839db465df1320e4753e6e9f70ca7e9b4d46d"
@@ -1692,6 +1712,13 @@
   dependencies:
     "@types/react" "*"
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+>>>>>>> master
+>>>>>>> Stashed changes
 "@types/react@*":
   version "16.9.46"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.46.tgz#f0326cd7adceda74148baa9bff6e918632f5069e"
@@ -1701,6 +1728,15 @@
     csstype "^3.0.2"
 
 "@types/react@^16.9.5":
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+=======
+"@types/react@*", "@types/react@^16.9.5":
+>>>>>>> Stashed changes
+=======
+>>>>>>> master
+>>>>>>> Stashed changes
   version "16.9.49"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.49.tgz#09db021cf8089aba0cdb12a49f8021a69cce4872"
   integrity sha512-DtLFjSj0OYAdVLBbyjhuV9CdGVHCkHn2R+xr3XkBvK2rS1Y1tkc14XSGjYgm5Fjjr90AxH9tiSzc1pCFMGO06g==
@@ -4458,10 +4494,29 @@ eventsource@^1.0.7:
   dependencies:
     original "^1.0.0"
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+>>>>>>> master
+>>>>>>> Stashed changes
 evergreen-ui@^5.0.6:
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/evergreen-ui/-/evergreen-ui-5.0.6.tgz#a4dcfc897c1e91aee8fd6ab8f695bca96a7b0b95"
   integrity sha512-yu335E6j53L/dPIdFdwu3U8h5BHx7ivpw+tdB0yx63SL4Zs28+UdtI8uSiTXyOjn794DH9BcuMIFOWmxwifgWw==
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+=======
+evergreen-ui@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/evergreen-ui/-/evergreen-ui-5.1.1.tgz#243ba960ce726f189e634cb74bee14cb9eef6a4c"
+  integrity sha512-LK1O045LObv79r3ACOxr+AyqnsK4M9ecxMrbI7VvTAaVp/RAKmlwwT7AjDwuGJOwnmI3epkAmiwMzJgRIxqd1Q==
+>>>>>>> Stashed changes
+=======
+>>>>>>> master
+>>>>>>> Stashed changes
   dependencies:
     "@babel/runtime" "^7.1.2"
     "@types/react" "^16.9.5"
@@ -9043,7 +9098,19 @@ react-input-autosize@^2.2.2:
   dependencies:
     prop-types "^15.5.8"
 
+<<<<<<< Updated upstream
 react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
+=======
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
+=======
+react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
+>>>>>>> Stashed changes
+=======
+react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
+>>>>>>> master
+>>>>>>> Stashed changes
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
