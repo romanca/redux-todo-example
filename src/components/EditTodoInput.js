@@ -4,6 +4,8 @@ import PriorityPicker from "./PriorityPicker";
 import DatePicker from "./DatePicker";
 import { get } from "lodash";
 import Space from "./Space";
+import Pane from "./Pane";
+import Button from "./Button";
 
 const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
   const [todo, setTodo] = useState(
@@ -36,14 +38,7 @@ const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
 
   return (
     <div>
-      <div
-        style={{
-          border: "0.2px solid black",
-          width: "100%",
-          padding: 10,
-          borderRadius: 5,
-          boxShadow: "2px 2px 7px 0px rgba(0,0,0,0.49)",
-        }}>
+      <Pane>
         <input
           value={todo.title}
           onChange={handleChangeTitle}
@@ -74,26 +69,11 @@ const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
             placeholder={"Select date"}
           />
         </div>
-      </div>
-      <div style={{ marginTop: 10 }}>
-        <button
-          onClick={handleSubmit}
-          disabled={!todo.title}
-          style={{
-            width: 80,
-            height: 35,
-            backgroundColor: "tomato",
-            fontWeight: 700,
-            fontSize: "13px!important",
-            lineHeight: "17px",
-            borderRadius: 5,
-            outline: "none",
-            border: "none",
-            cursor: "pointer",
-            marginBottom: 10,
-          }}>
+      </Pane>
+      <div style={{ marginTop: 10, display: "flex" }}>
+        <Button onClick={handleSubmit} disabled={!todo.title}>
           Save
-        </button>
+        </Button>
         <button
           onClick={onRequestClose}
           style={{
@@ -103,6 +83,7 @@ const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
             border: "none",
             marginLeft: 5,
             cursor: "pointer",
+            marginTop: -10,
           }}>
           Cancel
         </button>

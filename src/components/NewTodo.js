@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createTodo } from "../actions/todos";
 import EditTodoInput from "./EditTodoInput";
+import PlusIcon from "./Icons/PlusIcon";
 
 const NewTodo = () => {
   const [opened, setOpened] = useState(false);
@@ -26,6 +27,7 @@ const NewTodo = () => {
         <EditTodoInput onRequestClose={onClose} onConfirm={onConfirm} />
       ) : (
         <div
+          onClick={onOpen}
           style={{
             cursor: "pointer",
             padding: "5px 15px",
@@ -33,18 +35,14 @@ const NewTodo = () => {
             display: "flex",
             marginLeft: -5,
           }}>
-          <span
+          <PlusIcon
             style={{
               fontSize: 30,
-              marginRight: 7,
-              color: "red",
-              fontWeight: 100,
-            }}>
-            +
-          </span>
-          <span onClick={onOpen} style={{ marginTop: 12 }}>
-            Add Task
-          </span>
+              marginRight: 8,
+              fontWeight: 500,
+              marginTop: 12,
+            }}></PlusIcon>
+          <span style={{ marginTop: 12 }}>Add Task</span>
         </div>
       )}
     </div>
