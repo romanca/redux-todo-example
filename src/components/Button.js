@@ -18,7 +18,7 @@ const Button = ({ children, onClick, disabled, style }) => {
           border: "none",
           cursor: "pointer",
           marginBottom: 10,
-
+          color: "black",
           ...style,
         }}>
         {children}

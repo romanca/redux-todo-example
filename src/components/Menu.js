@@ -10,6 +10,7 @@ import {
 import { MENU_ACTION_BUTTON_TYPES } from "../utils/Constants";
 import { useHover } from "../hooks";
 import { useSelector } from "react-redux";
+import Pane from "./Pane";
 
 function useLabels() {
   return useSelector((state) => state.labels.labels);
@@ -30,16 +31,15 @@ const Menu = () => {
   const { hovered, listeners } = useHover();
 
   return (
-    <div
+    <Pane
       {...listeners}
       style={{
-        width: 200,
+        width: 270,
         height: "fit-content",
         minHeight: 400,
         border: "1px solid rgba(0,0,0,0.49)",
         borderRadius: 20,
         marginRight: 30,
-        boxShadow: "4px 4px 7px 0px rgba(0,0,0,0.49)",
         display: "flex",
         flexDirection: "column",
         paddingTop: 20,
@@ -96,7 +96,7 @@ const Menu = () => {
         }}
         itemType='LABELS'
       />
-    </div>
+    </Pane>
   );
 };
 
