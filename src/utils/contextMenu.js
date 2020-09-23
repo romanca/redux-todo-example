@@ -18,7 +18,6 @@ const menuItems = {
   },
 };
 
-
 const contextMenu = {
   [contextMenuKeys.TODO_VIEW]: [menuItems.REMOVE, menuItems.EDIT],
 };
@@ -39,6 +38,6 @@ export function useContextMenuActions() {
 
 export function useContextMenuItems() {
   return {
-    getMenuItems: (contextMenuKey) => {}
+    getMenuItems: (contextMenuKey) => {},
   };
 }

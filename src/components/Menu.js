@@ -34,7 +34,7 @@ const Menu = () => {
     <Pane
       {...listeners}
       style={{
-        width: 270,
+        width: 250,
         height: "fit-content",
         minHeight: 400,
         border: "1px solid rgba(0,0,0,0.49)",

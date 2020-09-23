@@ -1,6 +1,6 @@
 import React from "react";
-import { FaInbox } from "react-icons/fa";
+import { InboxIcon as InboxIconRaw } from "evergreen-ui";
 
-const InboxIcon = () => <FaInbox />;
+const InboxIcon = () => <InboxIconRaw />;
 
 export default InboxIcon;

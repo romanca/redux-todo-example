@@ -7,11 +7,17 @@ import IconButton, { ICON_BUTTON_TYPES } from "./IconButton";
 import { get } from "lodash";
 import { formatDateToTodoDate } from "../utils/date-formatters";
 import Pane from "./Pane";
+import TrashIcon from "./Icons/TrashIcon";
 
 const TODO_ITEM_MENU = [
   {
     label: "Remove",
     id: "REMOVE",
+    icon: (
+      <div>
+        <TrashIcon />
+      </div>
+    ),
   },
   {
     label: "Edit",
@@ -72,7 +78,6 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
       ) : (
         <Pane
           {...listeners}
-          elevation={4}
           style={{
             opacity: checked ? 0 : 1,
             transition: "opacity 0.5s",
@@ -82,6 +87,7 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
             width: "100%",
             marginBottom: 10,
             display: "flex",
+            background: "white",
           }}>
           <div>
             <CheckBox
