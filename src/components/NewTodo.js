@@ -37,12 +37,12 @@ const NewTodo = () => {
           }}>
           <PlusIcon
             style={{
-              fontSize: 30,
               marginRight: 8,
-              fontWeight: 500,
               marginTop: 12,
             }}></PlusIcon>
-          <span style={{ marginTop: 12 }}>Add Task</span>
+          <span style={{ marginTop: 12, textShadow: "3px 2px 6px grey" }}>
+            Add Task
+          </span>
         </div>
       )}
     </div>

@@ -91,7 +91,12 @@ const Todo = ({ item, onTodoRemoved, onTodoEdited }) => {
             />
           </div>
           <div style={{ width: "100%" }}>
-            <div style={{ flex: 1, marginLeft: -5, fontWeight: "bold" }}>
+            <div
+              style={{
+                flex: 1,
+                marginLeft: -5,
+                fontWeight: "bold",
+              }}>
               {item.title}
             </div>
             {item.date && (
