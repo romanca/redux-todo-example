@@ -11,6 +11,7 @@ const Pane = ({ children, style, ...listeners }) => {
           border: "0.2px solid black",
           width: "100%",
           padding: 10,
+          backgroundColor: "white",
           borderRadius: 5,
           ...style,
         }}>

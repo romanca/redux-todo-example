@@ -1,7 +1,7 @@
 import React from "react";
+import { Button } from "evergreen-ui";
 import DatePickerRaw from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { PickerButton } from "../StyledComponents";
 import { formatDateToTodoDate } from "../utils/date-formatters";
 
 class DatePickerInput extends React.Component {
@@ -9,8 +9,16 @@ class DatePickerInput extends React.Component {
     const { onClick, value, placeholderText } = this.props;
     const finalValue = value ? formatDateToTodoDate(value) : placeholderText;
     return (
-      <div onClick={onClick} >
-        <PickerButton>{finalValue}</PickerButton>
+      <div onClick={onClick}>
+        <Button
+          style={{
+            background: "transparent",
+            outline: "none",
+            border: "1px solid black",
+            borderRadius: 7,
+          }}>
+          {finalValue}
+        </Button>
       </div>
     );
   }

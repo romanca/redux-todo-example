@@ -17,7 +17,7 @@ export const staticMenuItems = [
     label: "Inbox",
     id: staticMenuItemsIds.INBOX,
     icon: (
-      <div style={{ marginRight: 10, display: "flex", alignItems: "center" }}>
+      <div style={{ marginRight: -10, display: "flex", alignItems: "center" }}>
         <InboxIcon />
       </div>
     ),

@@ -1,8 +1,9 @@
 import React from "react";
 
-export const PickerButton = ({ children }) => {
+export const PickerButton = ({ children, ...rest }) => {
   return (
     <div
+      {...rest}
       style={{
         display: "flex",
         padding: 5,

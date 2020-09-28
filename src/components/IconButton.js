@@ -1,8 +1,8 @@
 import React from "react";
 import { useHover } from "../hooks";
-import ContextMenu from "./ContextMenu";
 import DottedMenuIcon from "./Icons/DottedMenuIcon";
 import PlusIcon from "./Icons/PlusIcon";
+import Context from "./Popover";
 
 export const ICON_BUTTON_TYPES = {
   PLUS: "PLUS",
@@ -11,7 +11,7 @@ export const ICON_BUTTON_TYPES = {
 };
 
 const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
-  const { listeners, hover } = useHover();
+  const { listeners } = useHover();
   const hovered = true;
   const backgroundColor = hovered ? "lightGray" : "white";
 
@@ -49,7 +49,7 @@ const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
       );
     case ICON_BUTTON_TYPES.CONTEXT_MENU:
       return (
-        <ContextMenu
+        <Context
           onItemClick={handleContextMenuItemClick}
           id={contextMenuId}
           items={items}>
@@ -58,7 +58,7 @@ const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
             {...listeners}>
             <DottedMenuIcon hovered={hovered} />
           </div>
-        </ContextMenu>
+        </Context>
       );
     case ICON_BUTTON_TYPES.PLUS:
       return (

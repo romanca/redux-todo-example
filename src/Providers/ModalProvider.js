@@ -53,8 +53,7 @@ const ModalProvider = ({ children }) => {
 
   return (
     <ModalsContext.Provider
-      value={{ setModal, closeModal: handleCloseRequest }}
-    >
+      value={{ setModal, closeModal: handleCloseRequest }}>
       {opened && modalContent && (
         <Modal
           visible={visible}

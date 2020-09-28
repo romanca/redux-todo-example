@@ -5,7 +5,6 @@ import {
   ContextMenuTrigger,
 } from "react-contextmenu";
 import { useHover } from "../hooks";
-import Pane from "./Pane";
 
 const Item = ({ item, onClick }) => {
   const { listeners, hovered } = useHover();
@@ -19,10 +18,10 @@ const Item = ({ item, onClick }) => {
         {...listeners}
         style={{
           padding: 5,
+          borderBottom: "1px solid black",
           backgroundColor,
           cursor: "pointer",
           minWidth: 150,
-          borderRadius: 3,
         }}>
         {item.label}
       </div>
@@ -36,17 +35,20 @@ const ContextMenu = ({ children, items, onItemClick, id, menuContent }) => {
       <ContextMenuTrigger id={id} mouseButton={0}>
         {children}
       </ContextMenuTrigger>
-      <ContextMenuRaw hideOnLeave={false} id={id}>
-        <Pane
-          style={{
-            backgroundColor: "white",
-          }}>
-          {menuContent && menuContent}
-          {items &&
-            items.map((i, index) => (
-              <Item key={index} item={i} onClick={onItemClick} />
-            ))}
-        </Pane>
+      <ContextMenuRaw
+        hideOnLeave={false}
+        id={id}
+        style={{
+          border: "1px solid black",
+          backgroundColor: "white",
+          borderBottomWidth: 0,
+          zIndex: 9999,
+        }}>
+        {menuContent && menuContent}
+        {items &&
+          items.map((i, index) => (
+            <Item key={index} item={i} onClick={onItemClick} />
+          ))}
       </ContextMenuRaw>
     </>
   );

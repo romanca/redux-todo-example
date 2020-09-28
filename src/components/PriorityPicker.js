@@ -1,6 +1,6 @@
 import React from "react";
-import { PickerButton } from "../StyledComponents";
-import ContextMenu from "./ContextMenu";
+import { Button, SelectMenu } from "evergreen-ui";
+import Component from "@reactions/component";
 
 export const priorities = [
   { id: "priority1", label: "Low", color: "green" },
@@ -16,22 +16,31 @@ const PriorityPicker = ({ onChange, value }) => {
   const backgroundColor = value ? value.color : "grey";
 
   return (
-    <ContextMenu
-      items={priorities}
-      onItemClick={handleClick}
-      id='PRIORITY_PICKER'>
-      <PickerButton>
-        <div
+    <Component>
+      <SelectMenu
+        options={priorities}
+        onSelect={handleClick}
+        hasFilter={false}
+        title='Select priority'>
+        <Button
           style={{
-            width: 10,
-            height: 10,
-            backgroundColor,
-            borderRadius: "50%",
-            marginRight: 5,
-          }}></div>
-        {value ? <div>{value.label}</div> : "Select Priority"}
-      </PickerButton>
-    </ContextMenu>
+            background: "transparent",
+            outline: "none",
+            border: "1px solid black",
+            borderRadius: 7,
+          }}>
+          <div
+            style={{
+              width: 10,
+              height: 10,
+              backgroundColor,
+              borderRadius: "50%",
+              marginRight: 5,
+            }}></div>
+          {value ? <div>{value.label}</div> : "Select Priority"}
+        </Button>
+      </SelectMenu>
+    </Component>
   );
 };
 

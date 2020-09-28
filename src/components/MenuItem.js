@@ -73,7 +73,6 @@ const MenuItem = React.memo(
       hovered && isSubItem && visible ? hoverBackground : "unset";
 
     const isRightIconVisible = () => {
-      return true;
       if (!rightIconVisible) {
         return false;
       }
