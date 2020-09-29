@@ -163,7 +163,7 @@ function useProjectContextMenu(item) {
 
   const items = [
     {
-      label: "edit",
+      label: "Edit",
       method: () => {
         openProjectsModal({ initialValues: indexedProjects[item.id] });
       },
@@ -176,7 +176,7 @@ function useProjectContextMenu(item) {
     },
 
     {
-      label: "remove",
+      label: "Delete",
       method: () => {
         showConfirmDialog({
           title: "Project Removal",
@@ -200,7 +200,7 @@ function useLabelContextMenu(item) {
 
   const items = [
     {
-      label: "edit",
+      label: "Edit",
       method: () => {
         openLabelsModal({
           initialValues: labels.find((l) => l.id === item.id),
@@ -208,7 +208,7 @@ function useLabelContextMenu(item) {
       },
     },
     {
-      label: "delete",
+      label: "Delete",
       method: () => {
         showConfirmDialog({
           title: "Label Removal",

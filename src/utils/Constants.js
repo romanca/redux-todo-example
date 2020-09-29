@@ -1,5 +1,5 @@
 import React from "react";
-import InboxIcon from "../components/Icons/InboxIcon";
+import { InboxIcon } from "evergreen-ui";
 
 export const MENU_ACTION_BUTTON_TYPES = {
   ADD_PROJECT: "ADD_PROJECT",
@@ -16,11 +16,6 @@ export const staticMenuItems = [
   {
     label: "Inbox",
     id: staticMenuItemsIds.INBOX,
-    icon: (
-      <div style={{ marginRight: -10, display: "flex", alignItems: "center" }}>
-        <InboxIcon />
-      </div>
-    ),
     color: "grey",
   },
 ];

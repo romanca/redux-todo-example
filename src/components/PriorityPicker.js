@@ -18,7 +18,14 @@ const PriorityPicker = ({ onChange, value }) => {
   return (
     <Component>
       <SelectMenu
-        options={priorities}
+        width={140}
+        height={140}
+        closeOnSelect={true}
+        options={priorities.map((i) => ({
+          ...i,
+          value: i.id,
+          icon: i.icon,
+        }))}
         onSelect={handleClick}
         hasFilter={false}
         title='Select priority'>

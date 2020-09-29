@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHover } from "../hooks";
 import DottedMenuIcon from "./Icons/DottedMenuIcon";
 import PlusIcon from "./Icons/PlusIcon";
@@ -11,9 +11,14 @@ export const ICON_BUTTON_TYPES = {
 };
 
 const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
-  const { listeners } = useHover();
+  const { listeners, hover } = useHover();
   const hovered = true;
   const backgroundColor = hovered ? "lightGray" : "white";
+  const [isShown, setIsShown] = useState(true);
+
+  const handleShown = () => {
+    setIsShown(!isShown);
+  };
 
   const handleContextMenuItemClick = (...params) => {
     const [item] = params;
@@ -24,6 +29,7 @@ const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
 
     if (onClick) {
       onClick(...params);
+      handleShown();
     }
   };
 

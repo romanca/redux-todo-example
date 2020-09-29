@@ -5,7 +5,7 @@ import DatePicker from "./DatePicker";
 import { get } from "lodash";
 import Space from "./Space";
 import Pane from "./Pane";
-import Button from "./Button";
+import { Button } from "evergreen-ui";
 
 const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
   const [todo, setTodo] = useState(
@@ -71,7 +71,22 @@ const EditTodoInput = ({ onRequestClose, initialItem, onConfirm }) => {
         </div>
       </Pane>
       <div style={{ marginTop: 10, display: "flex" }}>
-        <Button onClick={handleSubmit} disabled={!todo.title}>
+        <Button
+          onClick={handleSubmit}
+          disabled={!todo.title}
+          style={{
+            height: 35,
+            background: "tomato",
+            fontWeight: 700,
+            fontSize: "13px!important",
+            lineHeight: "17px",
+            borderRadius: 5,
+            outline: "none",
+            border: "none",
+            cursor: "pointer",
+            marginBottom: 10,
+            color: "black",
+          }}>
           Save
         </Button>
         <button

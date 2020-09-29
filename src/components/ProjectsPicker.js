@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { staticMenuItems } from "../utils/Constants";
 import { useDefaultProjectForTodoCreation, useProjects } from "../selectors";
@@ -17,12 +17,12 @@ function createProjectPickerActionItems() {
     {
       label: "Add new project",
       actionType: "NEW_PROJECT",
-      if: "NEW_PROJECT",
+      id: "NEW_PROJECT",
     },
   ];
 }
 
-const ProjectsPicker = ({ onChange, value, index }) => {
+const ProjectsPicker = ({ onChange, value }) => {
   const defaultProject = useDefaultProjectForTodoCreation();
   const projects = useProjects();
 
@@ -42,17 +42,24 @@ const ProjectsPicker = ({ onChange, value, index }) => {
 
   const displayedProject = foundProject || defaultProject;
 
+  const options = [
+    ...staticMenuItems,
+    ...projects,
+    ...createProjectPickerActionItems(),
+  ];
+  console.log(options);
+
   return (
     <Component>
       <SelectMenu
         width={200}
         title='Select project'
         hasFilter={false}
-        options={[
-          ...staticMenuItems,
-          ...projects,
-          ...createProjectPickerActionItems(),
-        ]}
+        closeOnSelect={true}
+        options={options.map((i) => ({
+          ...i,
+          value: i.id,
+        }))}
         onSelect={handleClick}>
         <Button
           style={{
@@ -63,50 +70,23 @@ const ProjectsPicker = ({ onChange, value, index }) => {
           }}>
           {displayedProject && (
             <>
-              <div style={{ display: "flex" }} key={index}>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <div
                   style={{
                     width: 10,
                     height: 10,
                     backgroundColor: displayedProject.color,
                     borderRadius: 10,
-                    marginTop: 11,
-                    marginLeft: -8,
                     marginRight: 5,
                   }}
                 />
-                {displayedProject.label}
+                <div> {displayedProject.label}</div>
               </div>
             </>
           )}
         </Button>
       </SelectMenu>
     </Component>
-    // <ContextMenu
-    //   items={[
-    //     ...staticMenuItems,
-    //     ...projects,
-    //     ...createProjectPickerActionItems(),
-    //   ]}
-    //   onItemClick={handleClick}
-    //   id='PROJECTS_PICKER'>
-    //   <PickerButton>
-    //     {displayedProject && (
-    //       <>
-    //         <div
-    //           style={{
-    //             width: 10,
-    //             height: 10,
-    //             backgroundColor: displayedProject.color,
-    //             borderRadius: 10,
-    //             marginRight: 5,
-    //           }}
-    //         />
-    //         {displayedProject.label}
-    //       </>
-    //     )}
-    //   </PickerButton>
-    // </ContextMenu>
   );
 };
 

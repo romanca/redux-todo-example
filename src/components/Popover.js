@@ -1,46 +1,48 @@
 import React from "react";
-import { Menu, Popover, Position } from "evergreen-ui";
+import { Pane, Popover, Position } from "evergreen-ui";
 import { useHover } from "../hooks";
 
-const Item = ({ item, onSelect }) => {
-  const { listeners } = useHover();
+const Item = ({ item, onClick, close, props }) => {
+  const { listeners, hovered } = useHover();
+  const backgroundColor = hovered ? "whitesmoke" : "white";
 
   return (
-    <Menu.Item
-      onSelect={(event) => {
-        onSelect(item, event);
+    <div
+      onClick={(event) => {
+        onClick(item, event);
       }}>
       <div
+        onClick={close}
+        {...props}
         {...listeners}
         style={{
-          padding: 5,
           cursor: "pointer",
           minWidth: 150,
+          paddingLeft: 15,
+          paddingTop: 10,
+          paddingBottom: 10,
+          backgroundColor,
+          borderBottom: "1px solid #E4E7EB",
         }}>
         {item.label}
       </div>
-    </Menu.Item>
+    </div>
   );
 };
 
 const Context = ({ children, items, onItemClick }) => {
   return (
-    <div>
-      <Popover
-        position={Position.BOTTOM_LEFT}
-        content={
-          <Menu>
-            <Menu.Group>
-              {items &&
-                items.map((i, index) => (
-                  <Item key={index} item={i} onSelect={onItemClick} />
-                ))}
-            </Menu.Group>
-          </Menu>
-        }>
-        {children}
-      </Popover>
-    </div>
+    <Popover
+      content={({ close }) => (
+        <Pane>
+          {items &&
+            items.map((i, index) => (
+              <Item key={index} item={i} onClick={onItemClick} close={close} />
+            ))}
+        </Pane>
+      )}>
+      {children}
+    </Popover>
   );
 };
 
