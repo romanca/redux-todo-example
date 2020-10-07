@@ -11,7 +11,7 @@ export const ICON_BUTTON_TYPES = {
 };
 
 const IconButton = ({ type, onClick, contextMenuId, items, isVisible }) => {
-  const { listeners, hover } = useHover();
+  const { listeners } = useHover();
   const hovered = true;
   const backgroundColor = hovered ? "lightGray" : "white";
   const [isShown, setIsShown] = useState(true);

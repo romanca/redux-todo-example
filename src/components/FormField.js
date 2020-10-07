@@ -1,4 +1,5 @@
 import React from "react";
+import { TextInputField } from "evergreen-ui";
 import ColorPicker from "./ColorPicker";
 import ProjectsPicker from "./ProjectsPicker";
 
@@ -26,7 +27,7 @@ const FormField = ({ type, onChange, value, label, error, items }) => {
       return (
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ marginBottom: 5 }}>{label}</div>
-          <input onChange={onChange} value={value} style={{ padding: 5 }} />
+          <TextInputField onChange={onChange} value={value} autoFocus />
           {error ? (
             <small style={{ color: "red", marginLeft: 5, marginTop: 5 }}>
               {error}

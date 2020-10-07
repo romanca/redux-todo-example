@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { staticMenuItems } from "../utils/Constants";
 import { useDefaultProjectForTodoCreation, useProjects } from "../selectors";
@@ -47,7 +47,6 @@ const ProjectsPicker = ({ onChange, value }) => {
     ...projects,
     ...createProjectPickerActionItems(),
   ];
-  console.log(options);
 
   return (
     <Component>
@@ -80,7 +79,7 @@ const ProjectsPicker = ({ onChange, value }) => {
                     marginRight: 5,
                   }}
                 />
-                <div> {displayedProject.label}</div>
+                <div>{displayedProject.label}</div>
               </div>
             </>
           )}

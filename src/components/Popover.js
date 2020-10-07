@@ -1,5 +1,5 @@
 import React from "react";
-import { Pane, Popover, Position } from "evergreen-ui";
+import { Pane, Popover } from "evergreen-ui";
 import { useHover } from "../hooks";
 
 const Item = ({ item, onClick, close, props }) => {

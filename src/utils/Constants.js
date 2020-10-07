@@ -1,6 +1,3 @@
-import React from "react";
-import { InboxIcon } from "evergreen-ui";
-
 export const MENU_ACTION_BUTTON_TYPES = {
   ADD_PROJECT: "ADD_PROJECT",
   ADD_LABEL: "ADD_LABEL",
